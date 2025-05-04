@@ -296,23 +296,17 @@ class HomeController extends Controller
                 "ruc_empresa" => $business->ruc,
                 "numero_celular" => $request->codigo . $request->telefono,
                 "mensaje" => 'Aquí le enviamos el detalle de su pedido',
-                "ruta_imagen" => config('app.url') . $pdfPath,
+                "ruta_imagen" => config('app.url') . '/' . $pdfPath,
                 "apikey_bot" => $apis->apikey_bot_whatsapp,
                 "ruta_bot" => $apis->ruta_bot_whatsapp
             ]);
 
+            // config('app.url')
+
             Cart::destroy();
-            return response()->json(['status' => true, 'msg' => $mensaje->body()]); 
+            return response()->json(['status' => true, 'msg' => 'El detalle de su pedido se envió a su WhatsApp']); 
         } catch (\Throwable $th) {
-            $mensaje = Http::post($apis->ruta_whatsapp, [
-                "ruc_empresa" => $business->ruc,
-                "numero_celular" => $request->codigo . $request->telefono,
-                "mensaje" => 'Aquí le enviamos el detalle de su pedido',
-                "ruta_imagen" => config('app.url') . $pdfPath,
-                "apikey_bot" => $apis->apikey_bot_whatsapp,
-                "ruta_bot" => $apis->ruta_bot_whatsapp
-            ]);
-            return response()->json(['status' => false, 'msg' => $mensaje->body()]);
+            return response()->json(['status' => false, 'msg' => $th->getMessage()]);
         }        
     }
 }
