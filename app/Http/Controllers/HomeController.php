@@ -302,7 +302,7 @@ class HomeController extends Controller
             ]);
 
             Cart::destroy();
-            return response()->json(['status' => true, 'msg' => 'El detalle de su pedido se envió a su WhatsApp']); 
+            return response()->json(['status' => true, 'msg' => $mensaje->body()]); 
         } catch (\Throwable $th) {
             $mensaje = Http::post($apis->ruta_whatsapp, [
                 "ruc_empresa" => $business->ruc,
@@ -312,7 +312,7 @@ class HomeController extends Controller
                 "apikey_bot" => $apis->apikey_bot_whatsapp,
                 "ruta_bot" => $apis->ruta_bot_whatsapp
             ]);
-            return response()->json(['status' => false, 'msg' => $mensaje]);
+            return response()->json(['status' => false, 'msg' => $mensaje->body()]);
         }        
     }
 }
