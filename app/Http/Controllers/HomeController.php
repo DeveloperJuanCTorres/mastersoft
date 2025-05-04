@@ -41,7 +41,7 @@ class HomeController extends Controller
         $business = Company::find(1);
         $categories = Taxonomy::whereHas('products', function ($query) {
             $query->where('stock', '>', 0);
-        })->get();
+        })->take(8)->get();
 
         $banners = Banner::all();
         $promotions = Promotion::take(2)->get();
@@ -86,7 +86,7 @@ class HomeController extends Controller
         $business = Company::find(1);
         $categories = Taxonomy::whereHas('products', function ($query) {
             $query->where('stock', '>', 0);
-        })->get();
+        })->take(8)->get();
 
         $relatedProducts = Product::where('taxonomy_id', $product->taxonomy_id)
                           ->where('id', '!=', $product->id)
@@ -100,7 +100,7 @@ class HomeController extends Controller
         $business = Company::find(1);
         $categories = Taxonomy::whereHas('products', function ($query) {
             $query->where('stock', '>', 0);
-        })->get();
+        })->take(8)->get();
 
         return view('contact',compact('categories','business'));
     }
@@ -111,7 +111,7 @@ class HomeController extends Controller
         $nosotros = Field::find(1);
         $categories = Taxonomy::whereHas('products', function ($query) {
             $query->where('stock', '>', 0);
-        })->get();
+        })->take(8)->get();
         return view('about', compact('categories','business','nosotros'));
     }
 
@@ -120,7 +120,7 @@ class HomeController extends Controller
         $business = Company::find(1);
         $categories = Taxonomy::whereHas('products', function ($query) {
             $query->where('stock', '>', 0);
-        })->get();
+        })->take(8)->get();
 
         return view('checkout',compact('categories','business'));
     }
@@ -130,7 +130,7 @@ class HomeController extends Controller
         $business = Company::find(1);
         $categories = Taxonomy::whereHas('products', function ($query) {
             $query->where('stock', '>', 0);
-        })->get();
+        })->take(8)->get();
         return view('libro-reclamaciones', compact('categories','business'));
     }
 
