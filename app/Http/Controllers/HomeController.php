@@ -215,7 +215,7 @@ class HomeController extends Controller
                 'idgrupo' => 0,
                 'idalmacen' => 0,
                 'descripcion' => '',
-                'cantidad_producto' => 10,
+                'cantidad_producto' => 1000,
                 'paginas' => 1,
                 'estado' => 'P',
                 'fechainicial' => '2025-04-25T14:54:34.307Z',
