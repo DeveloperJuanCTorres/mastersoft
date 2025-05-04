@@ -2,7 +2,7 @@
 <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
     <div class="row px-xl-5 pt-5">
         <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-            <img class="py-4" width="200" src="storage/{{$business->image}}" alt="">
+            <img class="py-4" width="200" src="{{asset("storage/$business->image")}}" alt="">
             <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>{{$business->address}}</p>
             <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>{{$business->email}}</p>
             <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>{{$business->phone}}</p>
