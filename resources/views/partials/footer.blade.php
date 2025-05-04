@@ -47,7 +47,7 @@
         <div class="col-md-6 px-xl-0">
             <p class="mb-md-0 text-center text-md-left text-secondary">
                 &copy; <a class="text-primary" href="#">{{$business->name}}</a>. Todos los derechos reservados. 
-                <br>Distribuido por: <a href="https://vesregenperu.com" target="_blank">Grupo VesergenPerú</a>
+                <br>Distribuido por: <a href="https://vesergenperu.com" target="_blank">Grupo VesergenPerú</a>
             </p>
         </div>
         <div class="col-md-6 px-xl-0 text-center text-md-right">
