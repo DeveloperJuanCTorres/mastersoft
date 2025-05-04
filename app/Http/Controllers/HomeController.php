@@ -296,7 +296,7 @@ class HomeController extends Controller
                 "ruc_empresa" => $business->ruc,
                 "numero_celular" => $request->codigo . $request->telefono,
                 "mensaje" => 'Aquí le enviamos el detalle de su pedido',
-                "ruta_imagen" => config('app.url') . '/public' . $pdfPath,
+                "ruta_imagen" => config('app.url') . '/public/' . $pdfPath,
                 "apikey_bot" => $apis->apikey_bot_whatsapp,
                 "ruta_bot" => $apis->ruta_bot_whatsapp
             ]);
