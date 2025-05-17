@@ -29,24 +29,77 @@ class ProductoController extends Controller
     public function addProduct(Request $request)
     {
         try {
-            
-            $marca = Brand::where('id_sistema',$request["grupo"])->get();
-            $categoria = Taxonomy::where('id_sistema',$request["linea"])->get();
-            if ($marca) {
-                if ($categoria) {
-                    
-                    Product::create([
-                        'id_sistema' => $request["codigo"],
-                        'taxonomy_id' => $categoria[0]->id,
-                        'brand_id' => $marca[0]->id,
-                        'name' => $request["descripcion"],
-                        'price' => $request["precio_venta"],
-                        'unidad_medida' => $request["presentacion"],
-                        'stock' =>$request["stock"],
-                        'slug' => Str::slug($request["descripcion"])                        
-                    ]);
+            foreach ($request->listaprod as $item) {
+                $marca = Brand::where('id_sistema',$item["grupo"])->first();
+                $categoria = Taxonomy::where('id_sistema',$item["linea"])->first();
+                if ($marca) {
+                    if ($categoria) {                        
+                        Product::create([
+                            'id_sistema' => $item["codigo"],
+                            'taxonomy_id' => $categoria->id,
+                            'brand_id' => $marca->id,
+                            'name' => $item["descripcion"],
+                            'price' => $item["precio_venta"],
+                            'unidad_medida' => $item["presentacion"],
+                            'stock' =>$item["stock"],
+                            'slug' => Str::slug($item["descripcion"])                        
+                            ]);                                        
+                    }
+                    else {
+                        $category = Taxonomy::create([
+                            'name' => $item["linea_name"],
+                            'id_sistema' => $item["linea"]
+                        ]); 
+
+                        Product::create([
+                            'id_sistema' => $item["codigo"],
+                            'taxonomy_id' => $category->id,
+                            'brand_id' => $marca->id,
+                            'name' => $item["descripcion"],
+                            'price' => $item["precio_venta"],
+                            'unidad_medida' => $item["presentacion"],
+                            'stock' =>$item["stock"],
+                            'slug' => Str::slug($item["descripcion"])                        
+                            ]); 
+                    }
+                }  
+                else {
+                    $brand = Brand::create([
+                        'name' => $item["grupo_name"],
+                        'id_sistema' => $item["grupo"]
+                    ]); 
+
+                    if ($categoria) {
+                        Product::create([
+                            'id_sistema' => $item["codigo"],
+                            'taxonomy_id' => $categoria->id,
+                            'brand_id' => $brand->id,
+                            'name' => $item["descripcion"],
+                            'price' => $item["precio_venta"],
+                            'unidad_medida' => $item["presentacion"],
+                            'stock' =>$item["stock"],
+                            'slug' => Str::slug($item["descripcion"])                        
+                            ]); 
+                    }
+                    else {
+                        $category1 = Taxonomy::create([
+                            'name' => $item["linea_name"],
+                            'id_sistema' => $item["linea"]
+                        ]); 
+
+                        Product::create([
+                            'id_sistema' => $item["codigo"],
+                            'taxonomy_id' => $category1->id,
+                            'brand_id' => $brand->id,
+                            'name' => $item["descripcion"],
+                            'price' => $item["precio_venta"],
+                            'unidad_medida' => $item["presentacion"],
+                            'stock' =>$item["stock"],
+                            'slug' => Str::slug($item["descripcion"])                        
+                            ]); 
+                    }
                 }
-            }  
+            } 
 
             return response()->json(['status' => true, 'msg' => 'El producto se agregó con exito']); 
 
