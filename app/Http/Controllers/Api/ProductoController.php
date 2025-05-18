@@ -32,7 +32,7 @@ class ProductoController extends Controller
             foreach ($request->listaprod as $item) {
                 $marca = Brand::where('id_sistema',$item["grupo"])->first();
                 $categoria = Taxonomy::where('id_sistema',$item["linea"])->first();
-                $producto = Product::where('name', $item["codigo"])->get();
+                $producto = Product::where('name', $item["descripcion"])->get();
                 if ($marca) {
                     if ($categoria) {                           
                         if ($producto->count() == 0) {
