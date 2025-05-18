@@ -32,9 +32,11 @@ class ProductoController extends Controller
             foreach ($request->listaprod as $item) {
                 $marca = Brand::where('id_sistema',$item["grupo"])->first();
                 $categoria = Taxonomy::where('id_sistema',$item["linea"])->first();
+                $producto = Product::where('name', $item["codigo"])->get();
                 if ($marca) {
-                    if ($categoria) {                        
-                        Product::create([
+                    if ($categoria) {                           
+                        if (!$producto) {
+                            Product::create([
                             'id_sistema' => $item["codigo"],
                             'taxonomy_id' => $categoria->id,
                             'brand_id' => $marca->id,
@@ -43,15 +45,16 @@ class ProductoController extends Controller
                             'unidad_medida' => $item["presentacion"],
                             'stock' =>$item["stock"],
                             'slug' => Str::slug($item["descripcion"])                        
-                            ]);                                        
+                            ]); 
+                        }                                        
                     }
                     else {
                         $category = Taxonomy::create([
                             'name' => $item["linea_name"],
                             'id_sistema' => $item["linea"]
                         ]); 
-
-                        Product::create([
+                        if (!$producto) {
+                            Product::create([
                             'id_sistema' => $item["codigo"],
                             'taxonomy_id' => $category->id,
                             'brand_id' => $marca->id,
@@ -61,6 +64,7 @@ class ProductoController extends Controller
                             'stock' =>$item["stock"],
                             'slug' => Str::slug($item["descripcion"])                        
                             ]); 
+                        }                        
                     }
                 }  
                 else {
@@ -70,7 +74,8 @@ class ProductoController extends Controller
                     ]); 
 
                     if ($categoria) {
-                        Product::create([
+                        if (!$producto) {
+                            Product::create([
                             'id_sistema' => $item["codigo"],
                             'taxonomy_id' => $categoria->id,
                             'brand_id' => $brand->id,
@@ -80,6 +85,7 @@ class ProductoController extends Controller
                             'stock' =>$item["stock"],
                             'slug' => Str::slug($item["descripcion"])                        
                             ]); 
+                        }                        
                     }
                     else {
                         $category1 = Taxonomy::create([
