@@ -35,7 +35,7 @@ class ProductoController extends Controller
                 $producto = Product::where('name', $item["codigo"])->get();
                 if ($marca) {
                     if ($categoria) {                           
-                        if (!$producto) {
+                        if ($producto->count() == 0) {
                             Product::create([
                             'id_sistema' => $item["codigo"],
                             'taxonomy_id' => $categoria->id,
@@ -53,7 +53,7 @@ class ProductoController extends Controller
                             'name' => $item["linea_name"],
                             'id_sistema' => $item["linea"]
                         ]); 
-                        if (!$producto) {
+                        if ($producto->count() == 0) {
                             Product::create([
                             'id_sistema' => $item["codigo"],
                             'taxonomy_id' => $category->id,
@@ -74,7 +74,7 @@ class ProductoController extends Controller
                     ]); 
 
                     if ($categoria) {
-                        if (!$producto) {
+                        if ($producto->count() == 0) {
                             Product::create([
                             'id_sistema' => $item["codigo"],
                             'taxonomy_id' => $categoria->id,
