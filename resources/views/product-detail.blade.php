@@ -15,7 +15,7 @@
             <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                 <div class="navbar-nav w-100">          
                     @foreach($categories as $category)          
-                    <a href="" class="nav-item nav-link">{{$category->name}}</a>
+                    <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
                     @endforeach
                     <a href="/store" class="btn btn-primary py-2 px-4 m-2" style="border-radius: 10px;">Más categorías</a>
                 </div>
@@ -121,6 +121,10 @@
                 <div class="d-flex mb-4">
                     <strong class="text-dark mr-3">Marca:</strong>
                     <label class="">{{$product->brand->name}}</label>
+                </div>
+                <div class="d-flex mb-4">
+                    <strong class="text-dark mr-3">Stock:</strong>
+                    <label class="">{{$product->stock}} Unidades</label>
                 </div>
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">

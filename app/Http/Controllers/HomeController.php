@@ -54,8 +54,12 @@ class HomeController extends Controller
         $business = Company::find(1);
         $products = Product::query();
 
-        if ($request->has('categories')) {
-            $products->whereIn('taxonomy_id', $request->categories);
+        // if ($request->has('categories')) {
+        //     $products->whereIn('taxonomy_id', $request->categories);
+        // }
+        if ($request->filled('categories')) {
+            $categories = is_array($request->categories) ? $request->categories : [$request->categories];
+            $products->whereIn('taxonomy_id', $categories);
         }
 
         if ($request->has('brands')) {

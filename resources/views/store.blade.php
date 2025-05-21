@@ -14,7 +14,7 @@
             <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                 <div class="navbar-nav w-100">          
                     @foreach($categories->take(8) as $category)          
-                    <a href="" class="nav-item nav-link">{{$category->name}}</a>
+                    <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
                     @endforeach
                     <a href="/store" class="btn btn-primary py-2 px-4 m-2" style="border-radius: 10px;">Más categorías</a>
                 </div>
@@ -77,13 +77,14 @@
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filtrar por categoría</span></h5>
             <form id="filterForm">
                 <div class="bg-light p-4 mb-30">
-                        @foreach($categories as $category)
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" class="custom-control-input" name="categories[]" value="{{ $category->id }}">
-                            <label class="custom-control-label">{{$category->name}}</label>
-                            <span class="badge border font-weight-normal">{{$category->products->count()}}</span>
-                        </div>
-                        @endforeach
+                    @foreach($categories as $category)
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="radio" class="custom-control-input" name="categories[]" value="{{ $category->id }}"
+                        {{ request('categories') == $category->id ? 'checked' : '' }}>
+                        <label class="custom-control-label">{{$category->name}}</label>
+                        <span class="badge border font-weight-normal">{{$category->products->count()}}</span>
+                    </div>
+                    @endforeach
                 </div>
                 <!-- Category End -->
             
