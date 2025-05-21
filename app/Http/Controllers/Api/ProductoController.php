@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductResource;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Taxonomy;
@@ -211,5 +212,15 @@ class ProductoController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'msg' => $th->getMessage()]);
         }
+    }
+
+    public function listProducts()
+    {
+        $products = Product::with(['brand', 'taxonomy']) 
+                           ->where('stock', '>', 0) 
+                           ->get();
+
+        // return response()->json($products);
+        return ProductResource::collection($products);
     }
 }
