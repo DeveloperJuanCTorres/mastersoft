@@ -45,7 +45,7 @@ class HomeController extends Controller
 
         $banners = Banner::all();
         $promotions = Promotion::take(2)->get();
-        $products = Product::take(12)->get();
+        $products = Product::where('stock', '>', 0)->take(12)->get();
         return view('home',compact('categories','banners','promotions','products','business'));
     }
 
