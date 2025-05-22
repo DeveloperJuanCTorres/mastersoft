@@ -36,14 +36,14 @@ class ProductoController extends Controller
                 $producto = Product::where('name', $item["descripcion"])->get();
 
                 if ($item["tipo"] == 'E') {
-                    $productoe = Product::where('id_sistema',$item["codigo"])->get();
+                    $productoe = Product::where('id_sistema',$item["codigo"])->first();
                     Product::destroy($productoe->id);
                 }
                 else {                                    
                     if ($marca) {
-                        if ($categoria) {                           
-                            if ($producto->count() == 0) {
-                                if ($item["tipo"] == 'R') {
+                        if ($categoria) {  
+                            if ($item["tipo"] == 'R') {
+                                if ($producto->count() == 0) {
                                     Product::create([
                                     'id_sistema' => $item["codigo"],
                                     'taxonomy_id' => $categoria->id,
@@ -54,29 +54,30 @@ class ProductoController extends Controller
                                     'stock' =>$item["stock"],
                                     'slug' => Str::slug($item["descripcion"])                        
                                     ]); 
-                                }  
-                                if ($item["tipo"] == 'M') {
-                                    $productom = Product::where('id_sistema',$item["codigo"])->get();
-                                    Product::where('id', $productom->id)->update([
-                                    'id_sistema' => $item["codigo"],
-                                    'taxonomy_id' => $categoria->id,
-                                    'brand_id' => $marca->id,
-                                    'name' => $item["descripcion"],
-                                    'price' => $item["precio_venta"],
-                                    'unidad_medida' => $item["presentacion"],
-                                    'stock' =>$item["stock"],
-                                    'slug' => Str::slug($item["descripcion"])  
-                                    ]);
-                                }                          
-                            }                                        
+                                }
+                            }  
+                            if ($item["tipo"] == 'M') {
+                                $productom = Product::where('id_sistema',$item["codigo"])->first();
+                                Product::where('id', $productom->id)->update([
+                                'id_sistema' => $item["codigo"],
+                                'taxonomy_id' => $categoria->id,
+                                'brand_id' => $marca->id,
+                                'name' => $item["descripcion"],
+                                'price' => $item["precio_venta"],
+                                'unidad_medida' => $item["presentacion"],
+                                'stock' =>$item["stock"],
+                                'slug' => Str::slug($item["descripcion"])  
+                                ]);
+                            }                          
+                                                                   
                         }
                         else {
                             $category = Taxonomy::create([
                                 'name' => $item["linea_name"],
                                 'id_sistema' => $item["linea"]
-                            ]); 
-                            if ($producto->count() == 0) {
-                                if ($item["tipo"] == 'R') {
+                            ]);                             
+                            if ($item["tipo"] == 'R') {
+                                if ($producto->count() == 0) {
                                     Product::create([
                                     'id_sistema' => $item["codigo"],
                                     'taxonomy_id' => $category->id,
@@ -88,20 +89,20 @@ class ProductoController extends Controller
                                     'slug' => Str::slug($item["descripcion"])                        
                                     ]); 
                                 }
-                                if ($item["tipo"] == 'M') {
-                                    $productom = Product::where('id_sistema',$item["codigo"])->get();
-                                    Product::where('id', $productom->id)->update([
-                                    'id_sistema' => $item["codigo"],
-                                    'taxonomy_id' => $category->id,
-                                    'brand_id' => $marca->id,
-                                    'name' => $item["descripcion"],
-                                    'price' => $item["precio_venta"],
-                                    'unidad_medida' => $item["presentacion"],
-                                    'stock' =>$item["stock"],
-                                    'slug' => Str::slug($item["descripcion"])  
-                                    ]);
-                                }
-                            }                        
+                            }
+                            if ($item["tipo"] == 'M') {
+                                $productom = Product::where('id_sistema',$item["codigo"])->first();
+                                Product::where('id', $productom->id)->update([
+                                'id_sistema' => $item["codigo"],
+                                'taxonomy_id' => $category->id,
+                                'brand_id' => $marca->id,
+                                'name' => $item["descripcion"],
+                                'price' => $item["precio_venta"],
+                                'unidad_medida' => $item["presentacion"],
+                                'stock' =>$item["stock"],
+                                'slug' => Str::slug($item["descripcion"])  
+                                ]);
+                            }                                                   
                         }
                     }  
                     else {
@@ -110,9 +111,9 @@ class ProductoController extends Controller
                             'id_sistema' => $item["grupo"]
                         ]); 
 
-                        if ($categoria) {
-                            if ($producto->count() == 0) {
-                                if ($item["tipo"] == 'R') {
+                        if ($categoria) {                            
+                            if ($item["tipo"] == 'R') {
+                                if ($producto->count() == 0) {
                                     Product::create([
                                     'id_sistema' => $item["codigo"],
                                     'taxonomy_id' => $categoria->id,
@@ -124,20 +125,21 @@ class ProductoController extends Controller
                                     'slug' => Str::slug($item["descripcion"])                        
                                     ]); 
                                 }
-                                if ($item["tipo"] == 'M') {
-                                    $productom = Product::where('id_sistema',$item["codigo"])->get();
-                                    Product::where('id', $productom->id)->update([
-                                    'id_sistema' => $item["codigo"],
-                                    'taxonomy_id' => $categoria->id,
-                                    'brand_id' => $brand->id,
-                                    'name' => $item["descripcion"],
-                                    'price' => $item["precio_venta"],
-                                    'unidad_medida' => $item["presentacion"],
-                                    'stock' =>$item["stock"],
-                                    'slug' => Str::slug($item["descripcion"])  
-                                    ]);
-                                }
-                            }                        
+                            }
+                            if ($item["tipo"] == 'M') {
+                                $productom = Product::where('id_sistema',$item["codigo"])->first();
+                                Product::where('id', $productom->id)->update([
+                                'id_sistema' => $item["codigo"],
+                                'taxonomy_id' => $categoria->id,
+                                'brand_id' => $brand->id,
+                                'name' => $item["descripcion"],
+                                'price' => $item["precio_venta"],
+                                'unidad_medida' => $item["presentacion"],
+                                'stock' =>$item["stock"],
+                                'slug' => Str::slug($item["descripcion"])  
+                                ]);
+                            }
+                                                    
                         }
                         else {
                             $category1 = Taxonomy::create([
@@ -146,19 +148,21 @@ class ProductoController extends Controller
                             ]); 
 
                             if ($item["tipo"] == 'R') {
-                                Product::create([
-                                'id_sistema' => $item["codigo"],
-                                'taxonomy_id' => $category1->id,
-                                'brand_id' => $brand->id,
-                                'name' => $item["descripcion"],
-                                'price' => $item["precio_venta"],
-                                'unidad_medida' => $item["presentacion"],
-                                'stock' =>$item["stock"],
-                                'slug' => Str::slug($item["descripcion"])                        
-                                ]); 
+                                if ($producto->count() == 0) {
+                                    Product::create([
+                                    'id_sistema' => $item["codigo"],
+                                    'taxonomy_id' => $category1->id,
+                                    'brand_id' => $brand->id,
+                                    'name' => $item["descripcion"],
+                                    'price' => $item["precio_venta"],
+                                    'unidad_medida' => $item["presentacion"],
+                                    'stock' =>$item["stock"],
+                                    'slug' => Str::slug($item["descripcion"])                        
+                                    ]); 
+                                }
                             }
                             if ($item["tipo"] == 'M') {
-                                $productom = Product::where('id_sistema',$item["codigo"])->get();
+                                $productom = Product::where('id_sistema',$item["codigo"])->first();
                                 Product::where('id', $productom->id)->update([
                                 'id_sistema' => $item["codigo"],
                                 'taxonomy_id' => $category1->id,
