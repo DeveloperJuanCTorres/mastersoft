@@ -37,7 +37,9 @@ class ProductoController extends Controller
 
                 if ($item["tipo"] == 'E') {
                     $productoe = Product::where('id_sistema',$item["codigo"])->first();
-                    Product::destroy($productoe->id);
+                    if ($productoe) {
+                        Product::destroy($productoe->id);
+                    }                    
                 }
                 else {                                    
                     if ($marca) {
