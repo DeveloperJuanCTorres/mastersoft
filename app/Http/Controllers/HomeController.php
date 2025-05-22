@@ -52,11 +52,9 @@ class HomeController extends Controller
     public function store(Request $request)
     {
         $business = Company::find(1);
-        $products = Product::query();
+        $products = Product::query()->where('stock', '>', 0);
 
-        // if ($request->has('categories')) {
-        //     $products->whereIn('taxonomy_id', $request->categories);
-        // }
+       
         if ($request->filled('categories')) {
             $categories = is_array($request->categories) ? $request->categories : [$request->categories];
             $products->whereIn('taxonomy_id', $categories);
@@ -81,7 +79,7 @@ class HomeController extends Controller
             $query->where('stock', '>', 0);
         })->get();
 
-        // $products = Product::all();
+       
         return view('store',compact('categories','brands','products','business'));
     }
 

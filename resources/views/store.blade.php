@@ -82,7 +82,7 @@
                         <input type="radio" class="custom-control-input" name="categories[]" value="{{ $category->id }}"
                         {{ request('categories') == $category->id ? 'checked' : '' }}>
                         <label class="custom-control-label">{{$category->name}}</label>
-                        <span class="badge border font-weight-normal">{{$category->products->count()}}</span>
+                        <span class="badge border font-weight-normal">{{$category->productsInStock->count()}}</span>
                     </div>
                     @endforeach
                 </div>
@@ -95,7 +95,7 @@
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="radio" class="custom-control-input" name="brands[]" value="{{ $brand->id }}">
                             <label class="custom-control-label">{{$brand->name}}</label>
-                            <span class="badge border font-weight-normal">{{$brand->products->count()}}</span>
+                            <span class="badge border font-weight-normal">{{$brand->productsInStock->count()}}</span>
                         </div>
                         @endforeach
                 </div>

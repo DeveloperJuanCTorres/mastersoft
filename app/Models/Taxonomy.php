@@ -22,4 +22,9 @@ class Taxonomy extends Model
     {
         return $this->hasMany(Product::class, "taxonomy_id", "id");
     }
+
+    public function productsInStock()
+    {
+        return $this->hasMany(Product::class, 'taxonomy_id')->where('stock', '>', 0);
+    }
 }
