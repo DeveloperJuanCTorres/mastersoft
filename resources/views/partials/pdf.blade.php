@@ -62,7 +62,7 @@
 </head>
 <body>
     <div class="header">
-        <img width="300" class="izquirda" src="img/logo-factura.png" alt="">
+        <img width="300" class="izquirda" src="{{public_path('img/logo-factura.png')}}" alt="">
         <div class="contenedor">
             <div class="contenido">
                 <span>Computadoras - Impresoras - Laptops</span>
@@ -118,7 +118,7 @@
     </table>
 
     <table class="totals">
-        <tr style="background-color: rgb(108, 117, 125); border-radius: 5px; margin-top: 2px; margin-bottom: 2px; padding: 2px;">
+        <tr style="background-color: rgb(108, 117, 125); margin-top: 2px; margin-bottom: 2px; padding: 2px;">
             <th style="float: left; color: white !important;">
                 Subtotal
             </th>
@@ -126,7 +126,7 @@
                 S/ {{ number_format(Cart::subtotal()/1.18, 2) }}
             </th>
         </tr>
-        <tr style="background-color: rgb(108, 117, 125); border-radius: 5px; margin-top: 2px; margin-bottom: 2px; padding: 2px;">
+        <tr style="background-color: rgb(108, 117, 125); margin-top: 2px; margin-bottom: 2px; padding: 2px;">
             <th style="float: left; color: white !important;">
                 IGV (18%)
             </th>
@@ -134,7 +134,7 @@
                 S/ {{ number_format(Cart::subtotal() - Cart::subtotal()/1.18, 2) }}
             </th>
         </tr>
-        <tr style="background-color: rgb(164, 206, 58); border-radius: 5px; margin-top: 2px; margin-bottom: 2px; padding: 2px;">
+        <tr style="background-color: rgb(164, 206, 58); margin-top: 2px; margin-bottom: 2px; padding: 2px;">
             <th style="float: left; color: #333 !important;">
                 Total
             </th>
@@ -149,7 +149,7 @@
     </div>
 
     <div class="inferior" style="display: flex;align-items: center;">
-        <img style="float: left;" width="100" src="img/caja-piura.png" alt="">
+        <img style="float: left;" width="100" src="{{public_path('img/caja-piura.png')}}" alt="">
         <div>
             <span style="color: rgb(164, 206, 58);">SOS PORTÁTILES E.I.R.</span>
             <br>
