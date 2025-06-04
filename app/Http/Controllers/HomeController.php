@@ -285,6 +285,8 @@ class HomeController extends Controller
                     'direccion' => $request->direccion,
                     'orden' => $orden];
 
+            ini_set('memory_limit', '512M');
+
             $pdf = Pdf::loadView('partials.pdf', $data);  
 
             $pdfPath = 'pedido_' .$orden->id . '.pdf';
