@@ -262,16 +262,7 @@ class HomeController extends Controller
         try {
             $business = Company::find(1);
             $apis = Api::find(1);
-
-            $data = ['nombre' => $request->nombre,
-                    'apellidos' => $request->apellidos,
-                    'ruc' => $request->ruc,
-                    'empresa' => $request->empresa,
-                    'telefono' => $request->codigo . $request->telefono,
-                    'email' => $request->email,
-                    'direccion' => $request->direccion];
-
-            $pdf = Pdf::loadView('partials.pdf', $data);    
+                        
 
             // Generar el PDF y guardarlo en el storage/app/public/facturas/
 
@@ -284,6 +275,18 @@ class HomeController extends Controller
                 'direccion' => $request->direccion,
                 'ruc' => $request->ruc
             ]);
+
+            $data = ['nombre' => $request->nombre,
+                    'apellidos' => $request->apellidos,
+                    'ruc' => $request->ruc,
+                    'empresa' => $request->empresa,
+                    'telefono' => $request->codigo . $request->telefono,
+                    'email' => $request->email,
+                    'direccion' => $request->direccion,
+                    'orden' => $orden];
+
+            $pdf = Pdf::loadView('partials.pdf', $data);  
+
             $pdfPath = 'pedido_' .$orden->id . '.pdf';
             Storage::put('public/pedidos/' . $pdfPath, $pdf->output());
 
@@ -292,7 +295,7 @@ class HomeController extends Controller
             $orden->update([
                 'pdf' => 'pedidos/' . $pdfPath
             ]);
-
+            
 
             $mensaje = Http::post($apis->ruta_whatsapp, [
                 "ruc_empresa" => $business->ruc,
