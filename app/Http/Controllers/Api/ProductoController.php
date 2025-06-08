@@ -240,8 +240,9 @@ class ProductoController extends Controller
 
         $productos = Product::where('name', 'like', "%{$palabra}%")
             ->where('stock', '>', 0) 
+            ->limit(3)
             ->get();
 
-        return response()->json($productos);
+        return ProductResource::collection($productos);
     }
 }
