@@ -21,7 +21,7 @@ Route::post('addcategory', [ProductoController::class, 'addCategory']);
 Route::post('addproduct', [ProductoController::class, 'addProduct']);
 Route::get('/products', [ProductoController::class, 'listProducts']);
 
-Route::post('/products/buscar', [ProductoController::class, 'buscar']);
+Route::get('/products/buscar', [ProductoController::class, 'buscar']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

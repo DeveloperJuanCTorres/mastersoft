@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.6",
         "mindscms/laravelshoppingcart": "^2.1",
+        "rubix/ml": "^2.5",
         "tcg/voyager": "^1.6"
     },
     "require-dev": {
