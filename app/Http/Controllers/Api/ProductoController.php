@@ -238,7 +238,7 @@ class ProductoController extends Controller
         return ProductResource::collection($products);
     }
 
-    public function buscar(Request $request)
+    public function buscarsemantica(Request $request)
     {
         $query = $request->input('q');
 
@@ -257,82 +257,19 @@ class ProductoController extends Controller
         }
     }
 
-    // public function buscar(Request $request)
-    // {
-    //     $request->validate([
-    //         'palabra' => 'required|string|min:1'
-    //     ]);
+    public function buscar(Request $request)
+    {
+        $request->validate([
+            'palabra' => 'required|string|min:1'
+        ]);
 
-    //     $palabra = $request->input('palabra');
+        $palabra = $request->input('palabra');
 
-    //     // Buscar productos similares usando el vectorizador
-    //     $productos = $this->vectorizador->buscarProductosSimilares($palabra);
+        $productos = Product::where('name', 'like', "%{$palabra}%")
+            ->where('stock', '>', 0) 
+            ->limit(3)
+            ->get();
 
-    //     // Filtrar productos con stock > 0 y limitar a 3
-    //     $productosFiltrados = collect($productos)
-    //         ->filter(fn($producto) => $producto->stock > 0)
-    //         ->take(3);
-
-    //     return ProductResource::collection($productosFiltrados);
-    // }
-
-    // public function buscar(Request $request, VectorizadorRubix $vectorizador)
-    // {
-    //     $request->validate([
-    //         'palabra' => 'required|string|min:1'
-    //     ]);
-
-    //     $query = $request->input('palabra');
-
-    //     // Trae productos con stock
-    //     $productos = Product::where('stock', '>', 0)->get();
-
-    //     // Texto completo por producto (name + descripcion)
-    //     $descripciones = $productos->map(function ($producto) {
-    //         return "{$producto->name} {$producto->description}";
-    //     })->toArray();
-
-    //     // Insertamos la consulta como primer texto
-    //     array_unshift($descripciones, $query);
-
-    //     // Vectorizamos todos los textos
-    //     $vectores = $vectorizador->vectorizar($descripciones);
-
-    //     $vectorQuery = $vectores[0];
-    //     $vectoresProductos = array_slice($vectores, 1);
-
-    //     $resultados = [];
-
-    //     foreach ($productos as $i => $producto) {
-    //         $vector = $vectoresProductos[$i];
-    //         $distancia = $vectorizador->distanciaEuclidiana($vectorQuery, $vector);
-
-    //         $resultados[] = [
-    //             'producto' => $producto,
-    //             'distancia' => $distancia,
-    //         ];
-    //     }
-
-    //     usort($resultados, fn($a, $b) => $a['distancia'] <=> $b['distancia']);
-    //     $top = array_slice($resultados, 0, 3);
-    //     $productosCercanos = collect($top)->pluck('producto');
-
-    //     return ProductResource::collection($productosCercanos);
-    // }
-
-    // public function buscar(Request $request)
-    // {
-    //     $request->validate([
-    //         'palabra' => 'required|string|min:1'
-    //     ]);
-
-    //     $palabra = $request->input('palabra');
-
-    //     $productos = Product::where('name', 'like', "%{$palabra}%")
-    //         ->where('stock', '>', 0) 
-    //         ->limit(3)
-    //         ->get();
-
-    //     return ProductResource::collection($productos);
-    // }
+        return ProductResource::collection($productos);
+    }
 }
