@@ -19,7 +19,7 @@ class VectorizadorRubix
         );
     }
 
-    public function buscarProductosSimilares(string $query, int $limite = 3)
+    public function buscarProductosSimilares(string $query, int $limite = 100)
     {
         // Obtiene todos los productos con stock > 0
         $productos = Product::where('stock', '>', 0)->limit(3)->get();
