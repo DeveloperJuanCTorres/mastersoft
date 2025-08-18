@@ -8,17 +8,18 @@ use TCG\Voyager\Facades\Voyager;
 use App\Models\Product;
 
 class ProductController extends VoyagerBaseController
-{
+{    
+
     public function index(Request $request)
     {
         $slug = $this->getSlug($request);
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
-        // Modelo base
+      
         $model = app($dataType->model_name);
         $query = Product::query();
 
-        // === Filtros personalizados ===
+       
         if ($request->filled('taxonomy_id')) {
             $query->where('taxonomy_id', $request->taxonomy_id);
         }
@@ -26,7 +27,7 @@ class ProductController extends VoyagerBaseController
             $query->where('brand_id', $request->brand_id);
         }
 
-        // === Búsqueda texto ===
+       
         if ($search = $request->get('s')) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'LIKE', "%{$search}%")
@@ -34,16 +35,16 @@ class ProductController extends VoyagerBaseController
             });
         }
 
-        // === Orden ===
+       
         $orderBy = $request->get('order_by', 'id');
         $sortOrder = $request->get('sort_order', 'desc');
         $query->orderBy($orderBy, $sortOrder);
 
-        // === Paginación ===
-        $perPage = $request->get('per_page', 15);
+        
+        $perPage = $request->get('per_page', 9999);
         $dataTypeContent = $query->paginate($perPage);
 
-        // === SoftDeletes ===
+        
         $usesSoftDeletes = false;
         $showSoftDeleted = false;
 
@@ -55,10 +56,10 @@ class ProductController extends VoyagerBaseController
             }
         }
 
-        // === Multi-idioma ===
+        
         $isModelTranslatable = is_bread_translatable($model);
 
-        // === Actions ===
+        
         $actions = [];
         if (!empty($dataTypeContent->first())) {
             foreach (Voyager::actions() as $action) {
@@ -66,22 +67,22 @@ class ProductController extends VoyagerBaseController
             }
         }
 
-        // === Server-side (DataTables) ===
+        
         $isServerSide = isset($dataType->server_side) && $dataType->server_side;
 
-        // === Checkbox (acciones masivas) ===
+        
         $showCheckboxColumn = false;
         if (auth()->user()->can('delete', app($dataType->model_name))) {
             $showCheckboxColumn = true;
         }
 
-        // === Order column ===
+        
         $orderColumn = [];
         if (!empty($dataTypeContent->first()) && $orderBy) {
             $orderColumn = $dataTypeContent->first()->getAttributes();
         }
 
-        // === Search actual ===
+        
         $search = $request->get('s');
 
         return view('vendor.voyager.products.browse', compact(
