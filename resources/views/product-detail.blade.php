@@ -82,7 +82,7 @@
                    
                     @if($imagenes)
                         @foreach($imagenes as $key => $item)
-                        @if($key == 1)
+                        @if($key == 0)
                         <div class="carousel-item active">
                             <img class="w-100 h-100" src="{{asset('storage/' . $item)}}" alt="Image">
                         </div>
