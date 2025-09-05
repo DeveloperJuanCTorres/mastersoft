@@ -203,7 +203,7 @@ class ProductoController extends Controller
                 }
             } 
 
-            return response()->json(['status' => true, 'msg' => 'Proceso terminado' . $fallidos, 'fallidos' => $fallidos]); 
+            return response()->json(['status' => true, 'msg' => 'Proceso terminado' . json_encode($fallidos), 'fallidos' => json_encode($fallidos)]); 
 
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'msg' => $th->getMessage()]);
