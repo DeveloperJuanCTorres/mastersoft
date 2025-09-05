@@ -73,7 +73,7 @@ class ProductoController extends Controller
                                         $fallidos[] = [
                                             'codigo' => $item["codigo"],
                                             'descripcion' => $item["descripcion"],
-                                            'msg_error' => $e->getMessage()
+                                            'msg_error' => 'producto duplicado'
                                         ];
                                     }
                                 }  
