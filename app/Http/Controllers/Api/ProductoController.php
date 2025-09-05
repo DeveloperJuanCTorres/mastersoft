@@ -196,14 +196,14 @@ class ProductoController extends Controller
                     $fallidos[] = [
                         'codigo' => $item["codigo"],
                         'descripcion' => $item["descripcion"],
-                        'error' => $e->getMessage()
+                        'msg_error' => $e->getMessage()
                     ];
                     // continuar con el siguiente
                     continue;
                 }
             } 
 
-            return response()->json(['status' => true, 'msg' => 'Proceso terminado', 'fallidos' => $fallidos]); 
+            return response()->json(['status' => true, 'msg' => 'Proceso terminado' . $fallidos, 'fallidos' => $fallidos]); 
 
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'msg' => $th->getMessage()]);
