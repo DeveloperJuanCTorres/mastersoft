@@ -69,6 +69,13 @@ class ProductoController extends Controller
                                         'slug' => Str::slug($item["descripcion"])                        
                                         ]); 
                                     }
+                                    else{
+                                        $fallidos[] = [
+                                            'codigo' => $item["codigo"],
+                                            'descripcion' => $item["descripcion"],
+                                            'msg_error' => $e->getMessage()
+                                        ];
+                                    }
                                 }  
                                 if ($item["tipo"] == 'M') {
                                     $productom = Product::where('id_sistema',$item["codigo"])->first();
