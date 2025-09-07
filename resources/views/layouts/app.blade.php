@@ -16,6 +16,10 @@
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
+    <?php
+        $version = '1993.0.1';
+    ?>
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
@@ -24,12 +28,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{asset('lib/animate/animate.min.css')}}" rel="stylesheet">
-    <link href="{{asset('lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{asset('lib/animate/animate.min.css')}}?v=<?php echo $version ?>" rel="stylesheet">
+    <link href="{{asset('lib/owlcarousel/assets/owl.carousel.min.css')}}?v=<?php echo $version ?>" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    <link href="{{asset('css/phone.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}?v=<?php echo $version ?>" rel="stylesheet">
+    <link href="{{asset('css/phone.css')}}?v=<?php echo $version ?>" rel="stylesheet">
 
     <!-- Scripts -->
     <!-- vite(['resources/sass/app.scss', 'resources/js/app.js']) -->

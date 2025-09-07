@@ -37,9 +37,6 @@
             <img class="img-fluid w-100" src="img/defectomaster.jpeg" alt="">
             @endif
             <div class="product-action">
-                <!-- <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a> -->
-                <!-- <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a> -->
                 <input type="hidden" id="qty" value="1">
                 <a class="btn btn-outline-dark addcart" href="#" data-id="{{$product->id}}">
                     <i class="fa fa-shopping-cart"></i>
@@ -51,7 +48,7 @@
             </div>
         </div>
         <div class="text-center py-4">
-            <a class="h6 text-decoration-none text-truncate" href="">{{$product->name}}</a>
+            <a class="h6 text-decoration-none" href="">{{$product->name}}</a>
             <div class="d-flex align-items-center justify-content-center mt-2">
                 <h5>S/. {{$product->price}}</h5><h6 class="text-muted ml-2"><del>S/. {{$product->price*1.20}}</del></h6>
             </div>
