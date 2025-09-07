@@ -86,7 +86,7 @@
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <div class="bg-white mb-30 overflow-auto" style="max-height: 600px;">
+                                <div class="bg-white mb-30 overflow-auto" style="max-height: 400px;">
                                     @foreach($categories as $category)
                                     <div class="mb-3">                                        
                                         <input type="radio" class="custom-control-input" style="width: 20px;" name="categories[]" value="{{ $category->id }}">                       
@@ -107,7 +107,7 @@
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <div class="bg-white mb-30 overflow-auto" style="max-height: 600px;">
+                                <div class="bg-white mb-30 overflow-auto" style="max-height: 400px;">
                                     @foreach($brands as $brand)
                                     <div class="mb-3">
                                         <input type="radio" class="custom-control-input" style="width: 20px;" name="brands[]" value="{{ $brand->id }}">
