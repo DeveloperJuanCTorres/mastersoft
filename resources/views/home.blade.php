@@ -86,8 +86,8 @@
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">{{$promotion->titulo}}</h6>
                     <h3 class="text-white mb-3">{{$promotion->description}}</h3>
-                    <h6 class="text-white text-uppercase">Ahorre un 20%</h6>
-                    <h3 class="text-white mb-3">Oferta especial</h3>
+                    <!-- <h6 class="text-white text-uppercase">Ahorre un 20%</h6> -->
+                    <!-- <h3 class="text-white mb-3">Oferta especial</h3> -->
                     <a href="" class="btn btn-primary" style="border-radius: 10px;">Comprar ahora</a>
                 </div>
             </div>
@@ -220,8 +220,8 @@
             <div class="product-offer mb-30" style="height: 300px;">
                 <img class="img-fluid" src="storage/{{$promotion->image}}" alt="">
                 <div class="offer-text">
-                    <h6 class="text-white text-uppercase">Ahorre un 20%</h6>
-                    <h3 class="text-white mb-3">Oferta especial</h3>
+                    <!-- <h6 class="text-white text-uppercase">Ahorre un 20%</h6>
+                    <h3 class="text-white mb-3">Oferta especial</h3> -->
                     <a href="" class="btn btn-primary" style="border-radius: 10px;">Comprar ahora</a>
                 </div>
             </div>
