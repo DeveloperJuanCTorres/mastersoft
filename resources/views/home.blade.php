@@ -66,12 +66,12 @@
                     @foreach($banners as $key => $banner)
                         @if($key == 1)
                         <div class="carousel-item position-relative active" style="height: 430px;">
-                            <img class="position-absolute w-100 h-100" src="storage/{{$banner->image}}" style="object-fit: cover;">
+                            <img class="position-absolute w-100 h-100" src="storage/{{$banner->image}}">
                             
                         </div>
                         @else
                         <div class="carousel-item position-relative" style="height: 430px;">
-                            <img class="position-absolute w-100 h-100" src="storage/{{$banner->image}}" style="object-fit: cover;">
+                            <img class="position-absolute w-100 h-100" src="storage/{{$banner->image}}">
                             
                         </div>
                         @endif
