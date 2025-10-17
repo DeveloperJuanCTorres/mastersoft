@@ -47,7 +47,7 @@ class CartController extends Controller
         $business = Company::find(1);
         $categories = Taxonomy::whereHas('products', function ($query) {
             $query->where('stock', '>', 0);
-        })->get();
+        })->take(8)->get();
 
         return view('cart',compact('categories','business'));
     }
