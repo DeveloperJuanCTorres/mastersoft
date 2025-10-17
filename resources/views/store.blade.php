@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+
 @section('content')
 
 @include('partials.topbar')
@@ -15,7 +15,7 @@
                 <div class="collapse navbar-collapse rounded-bottom" id="allCat">
                     <div class="navbar-nav ms-auto py-0">
                         <ul class="list-unstyled categories-bars">
-                            @foreach($categories as $category)    
+                            @foreach($categoriesNav as $category)    
                             <li>
                                 <div class="categories-bars-item">
                                     <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
@@ -107,7 +107,7 @@
                         <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
                         <div class=""></div>
                     </div>
-                    <div class="additional-product mb-4">
+                    <div class="additional-product mb-4 overflow-auto" style="max-height: 400px;">
                         <h4>Marcas</h4>
                         @foreach($brands as $key => $brand)
                         <div class="additional-product-item">
@@ -276,7 +276,7 @@
 @include('partials.footer')
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/addcart.js"></script>
 <script>

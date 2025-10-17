@@ -53,6 +53,9 @@ class HomeController extends Controller
     {
         $business = Company::find(1);
         $products = Product::query()->where('stock', '>', 0);
+        $categoriesNav = Taxonomy::whereHas('products', function ($query) {
+            $query->where('stock', '>', 0);
+        })->take(8)->get();
 
        
         if ($request->filled('categories')) {
@@ -80,7 +83,7 @@ class HomeController extends Controller
         })->get();
 
        
-        return view('store',compact('categories','brands','products','business'));
+        return view('store',compact('categories','brands','products','business','categoriesNav'));
     }
 
     public function detail (Product $product)

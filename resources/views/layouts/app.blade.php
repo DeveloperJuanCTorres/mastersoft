@@ -17,7 +17,7 @@
     <link href="img/favicon.ico" rel="icon">
 
     <?php
-        $version = '1993.0.3';
+        $version = '1993.0.4';
     ?>
 
     
@@ -57,16 +57,16 @@
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('lib/wow/wow.min.js')}}"></script>
-    <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('lib/wow/wow.min.js')}}?v=<?php echo $version ?>"></script>
+    <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}?v=<?php echo $version ?>"></script>
 
 
     <!-- Template Javascript -->
-    <script src="{{asset('js/main.js')}}"></script>
+    <script src="{{asset('js/main.js')}}?v=<?php echo $version ?>"></script>
     <!-- <script src="{{asset('js/addcart.js')}}"></script> -->
-    <script src="{{asset('js/phone.js')}}"></script>
-    <script src="{{asset('js/ubigeo.js')}}"></script>
-    <script src="{{asset('js/buscar.js')}}"></script>
+    <script src="{{asset('js/phone.js')}}?v=<?php echo $version ?>"></script>
+    <script src="{{asset('js/ubigeo.js')}}?v=<?php echo $version ?>"></script>
+    <script src="{{asset('js/buscar.js')}}?v=<?php echo $version ?>"></script>
     @stack('scripts')
 </body>
 </html>
