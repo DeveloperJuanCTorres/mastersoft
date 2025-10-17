@@ -3,100 +3,114 @@
 @section('content')
 
 @include('partials.topbar')
-<!-- Navbar Start -->
-<div class="container-fluid bg-dark mb-30">
-    <div class="row px-xl-5">
+
+<!-- Navbar & Hero Start -->
+<div class="container-fluid nav-bar p-0">
+    <div class="row gx-0 bg-primary px-5 align-items-center py-2">
         <div class="col-lg-3 d-none d-lg-block">
-            <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categorías</h6>
-                <i class="fa fa-angle-down text-dark"></i>
-            </a>
-            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                <div class="navbar-nav w-100">          
-                    @foreach($categories->take(8) as $category)          
-                    <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
-                    @endforeach
-                    <a href="/store" class="btn btn-primary py-2 px-4 m-2" style="border-radius: 10px;">Más categorías</a>
+            <nav class="navbar navbar-light position-relative" style="width: 250px;">
+                <button class="navbar-toggler border-0 fs-4 w-100 px-0 text-start" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#allCat">
+                    <h4 class="m-0 text-white"><i class="fa fa-bars me-2"></i>Categorías</h4>
+                </button>
+                <div class="collapse navbar-collapse rounded-bottom" id="allCat">
+                    <div class="navbar-nav ms-auto py-0">
+                        <ul class="list-unstyled categories-bars">
+                            @foreach($categories as $category)    
+                            <li>
+                                <div class="categories-bars-item">
+                                    <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
+                                </div>
+                            </li>                            
+                            @endforeach
+                            <a href="/store" class="btn btn-primary py-2 px-4 m-2" style="border-radius: 10px;">Más categorías</a>                            
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </div>
-        <div class="col-lg-9">
-            <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                <a href="" class="text-decoration-none d-block d-lg-none">
+        <div class="col-12 col-lg-9">
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
+                <a href="/" class="navbar-brand d-block d-lg-none">
                     <img height="50" src="{{asset("storage/$business->image")}}" alt="">
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars fa-1x"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto py-0">
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
                         <a href="/" class="nav-item nav-link">Inicio</a>
                         <a href="/store" class="nav-item nav-link">Tienda</a>
                         <a href="/about" class="nav-item nav-link">Nosotros</a>
-                        <a href="/contact" class="nav-item nav-link">Contáctanos</a>
+                        <a href="/contact" class="nav-item nav-link me-2">Contáctanos</a>
+                        <div class="nav-item dropdown d-block d-lg-none mb-3">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categorías</a>
+                            <div class="dropdown-menu m-0">
+                                <ul class="list-unstyled categories-bars">
+                                    @foreach($categories as $category)    
+                                    <li>
+                                        <div class="categories-bars-item">
+                                            <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
+                                        </div>
+                                    </li>                            
+                                    @endforeach                                    
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                        <!-- <a href="" class="btn px-0">
-                            <i class="fas fa-heart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a> -->
-                        <a href="/cart" class="btn px-0 ml-3">
-                            <i class="fas fa-shopping-cart text-primary"></i>
-                            <span id="cartCount" class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
-                                {{\Cart::count()}}
-                            </span>
-                        </a>
-                    </div>
+                    
+                    <a href="/cart" class="text-muted d-flex align-items-center justify-content-center"><span
+                        class="rounded-circle btn-md-square border bg-white"><i class="fas fa-shopping-cart"></i></span>
+                    <span class="text-white ms-2" id="cartTotal">S/. {{\Cart::subtotal()}}</span></a>
                 </div>
             </nav>
         </div>
     </div>
 </div>
-<!-- Navbar End -->
+<!-- Navbar & Hero End -->
 
-<!-- Breadcrumb Start -->
-<div class="container-fluid">
-    <div class="row px-xl-5">
-        <div class="col-12">
-            <nav class="breadcrumb bg-light mb-30">
-                <a class="breadcrumb-item text-dark" href="/">Inicio</a>
-                <span class="breadcrumb-item active">Libro de reclamaciones</span>                
-            </nav>
-        </div>
-    </div>
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6 wow fadeInUp" data-wow-delay="0.1s">Libro de reclamaciones</h1>
+    <ol class="breadcrumb justify-content-center mb-0 wow fadeInUp" data-wow-delay="0.3s">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item active text-white">Reclamos</li>
+    </ol>
 </div>
-<!-- Breadcrumb End -->
+<!-- Single Page Header End -->
 
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
             <div class="page-content px-4">
-                <div class="header-text">
+                <div class="header-text py-5">
                     <h3 class="pt-4">1. DATOS DE LA PERSONA QUE PRESENTA LA QUEJA O RECLAMO</h3>
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Fecha Nacimiento</label>
-                                <input required type="date" class="form-control" id="fecha_nac" placeholder="Fecha Nacimiento">
                                 
+                                <input required type="date" class="form-control" id="fecha_nac" placeholder="Fecha Nacimiento">
+                                <label for="name">Fecha Nacimiento</label>
                             </div>                      
                         </div>
                         <div class="col-lg-3 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Tipo documento</label>
+                                
                                 <select required class="form-control" name="tipo_doc" id="tipo_doc">
                                     <option value="0">-Seleccionar-</option>
                                     <option value="DNI">DNI</option>
                                     <option value="PASAPORTE">PASAPORTE</option>
                                 </select>
-                                
+                                <label for="name">Tipo documento</label>
                             </div>                       
                         </div>
                         <div class="col-lg-3 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Número de documento</label>
-                                <input type="number" class="form-control" id="numero_doc" placeholder="Número de documento">
                                 
+                                <input type="number" class="form-control" id="numero_doc" placeholder="Número de documento">
+                                <label for="name">Número de documento</label>
                             </div>                       
                         </div>
                         <div class="col-lg-3 col-md-6 col-12 mt-4 px-6">
@@ -109,23 +123,23 @@
 
                         <div class="col-lg-3 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Apellido paterno</label>
+                                
                                 <input type="text" class="form-control" id="apellido_pat" placeholder="Apellido paterno">
-                                
+                                <label for="name">Apellido paterno</label>
                             </div>                        
                         </div>
                         <div class="col-lg-3 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Apellido materno</label>
+                                
                                 <input type="text" class="form-control" id="apellido_mat" placeholder="Apellido materno">
-                                
+                                <label for="name">Apellido materno</label>
                             </div>                        
                         </div>
                         <div class="col-lg-3 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Email">
                                 
+                                <input type="email" class="form-control" id="email" placeholder="Email">
+                                <label for="name">Email</label>
                             </div>                       
                         </div>
                         <div class="col-lg-3 col-md-6 col-12 mt-4 px-6">
@@ -136,37 +150,37 @@
 
                         <div class="col-lg-3 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Departamento</label>
+                               
                                 <select id="departamento" class="form-control departamento" name="mauticform[departamento]">    
                                     <option data-id="" value="">-Seleccionar-</option>
                                 </select>
-                                
+                                <label for="name">Departamento</label>
                             </div>                       
                         </div>
                         <div class="col-lg-3 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Provincia</label>
+                                
                                 <select id="provincia" class="form-control provincia" name="mauticform[provincia1]">
                                     <option data-id="" value="Chachapoyas">-Seleccionar-</option>                
                                 </select>
-                                
+                                <label for="name">Provincia</label>
                             </div>                         
                         </div>
                         <div class="col-lg-3 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Distrito</label>
+                                
                                 <select id="distrito" class="form-control distrito" name="mauticform[distrito1]">
                                     <option data-id="" value="">-Seleccionar-</option>
                                 </select>
-                                
+                                <label for="name">Distrito</label>
                             </div>                        
                         </div>
 
                         <div class="col-lg-9 col-md-12 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Dirección fiscal</label>
-                                <input type="text" class="form-control" id="direccion" placeholder="Direccion">
                                 
+                                <input type="text" class="form-control" id="direccion" placeholder="Direccion">
+                                <label for="name">Dirección fiscal</label>
                             </div>                       
                         </div>
                     </div>
@@ -174,31 +188,31 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Orden de compra</label>
-                                <input type="text" class="form-control" id="orden_compra" placeholder="Orden de compra">
                                 
+                                <input type="text" class="form-control" id="orden_compra" placeholder="Orden de compra">
+                                <label for="name">Orden de compra</label>
                             </div>                      
                         </div>
                         <div class="col-lg-6 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Monto del producto/servicio</label>
-                                <input type="number" class="form-control" id="producto" placeholder="Monto del producto/servicio">
                                 
+                                <input type="number" class="form-control" id="producto" placeholder="Monto del producto/servicio">
+                                <label for="name">Monto del producto/servicio</label>
                             </div>                       
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Detalla tu queja/reclamo</label>
-                                <textarea class="form-control" id="reclamo" rows="5" placeholder="Escribe"></textarea>
                                 
+                                <textarea class="form-control" id="reclamo" rows="5" placeholder="Escribe"></textarea>
+                                <label for="name">Detalla tu queja/reclamo</label>
                             </div>                        
                         </div>
                         <div class="col-lg-6 col-md-6 col-12 mt-4 px-6">
                             <div class="form-floating">
-                                <label for="name">Pedido</label>
-                                <textarea class="form-control" id="pedido" rows="5" placeholder="Escribe"></textarea>
                                 
+                                <textarea class="form-control" id="pedido" rows="5" placeholder="Escribe"></textarea>
+                                <label for="name">Pedido</label>
                             </div>                         
                         </div>
                         <div class="col-lg-12 my-4 text-center">

@@ -4,121 +4,208 @@
 
 @include('partials.topbar')
 
-<!-- Navbar Start -->
-<div class="container-fluid bg-dark mb-30">
-    <div class="row px-xl-5">
+<!-- Navbar & Hero Start -->
+<div class="container-fluid nav-bar p-0">
+    <div class="row gx-0 bg-primary px-5 align-items-center py-2">
         <div class="col-lg-3 d-none d-lg-block">
-            <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categorías</h6>
-                <i class="fa fa-angle-down text-dark"></i>
-            </a>
-            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                <div class="navbar-nav w-100">          
-                    @foreach($categories as $category)          
-                    <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
-                    @endforeach
-                    <a href="/store" class="btn btn-primary py-2 px-4 m-2" style="border-radius: 10px;">Más categorías</a>
+            <nav class="navbar navbar-light position-relative" style="width: 250px;">
+                <button class="navbar-toggler border-0 fs-4 w-100 px-0 text-start" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#allCat">
+                    <h4 class="m-0 text-white"><i class="fa fa-bars me-2"></i>Categorías</h4>
+                </button>
+                <div class="collapse navbar-collapse rounded-bottom" id="allCat">
+                    <div class="navbar-nav ms-auto py-0">
+                        <ul class="list-unstyled categories-bars">
+                            @foreach($categories as $category)    
+                            <li>
+                                <div class="categories-bars-item">
+                                    <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
+                                </div>
+                            </li>                            
+                            @endforeach
+                            <a href="/store" class="btn btn-primary py-2 px-4 m-2" style="border-radius: 10px;">Más categorías</a>                            
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </div>
-        <div class="col-lg-9">
-            <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                <a href="" class="text-decoration-none d-block d-lg-none">
+        <div class="col-12 col-lg-9">
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
+                <a href="/" class="navbar-brand d-block d-lg-none">
                     <img height="50" src="{{asset("storage/$business->image")}}" alt="">
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars fa-1x"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto py-0">
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
                         <a href="/" class="nav-item nav-link">Inicio</a>
                         <a href="/store" class="nav-item nav-link">Tienda</a>
                         <a href="/about" class="nav-item nav-link">Nosotros</a>
-                        <a href="/contact" class="nav-item nav-link active">Contáctanos</a>
+                        <a href="/contact" class="nav-item nav-link me-2 active">Contáctanos</a>
+                        <div class="nav-item dropdown d-block d-lg-none mb-3">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categorías</a>
+                            <div class="dropdown-menu m-0">
+                                <ul class="list-unstyled categories-bars">
+                                    @foreach($categories as $category)    
+                                    <li>
+                                        <div class="categories-bars-item">
+                                            <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
+                                        </div>
+                                    </li>                            
+                                    @endforeach                                    
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                        <!-- <a href="" class="btn px-0">
-                            <i class="fas fa-heart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a> -->
-                        <a href="/cart" class="btn px-0 ml-3">
-                            <i class="fas fa-shopping-cart text-primary"></i>
-                            <span id="cartCount" class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
-                                {{\Cart::count()}}
-                            </span>
-                        </a>
-                    </div>
+                    
+                    <a href="/cart" class="text-muted d-flex align-items-center justify-content-center"><span
+                        class="rounded-circle btn-md-square border bg-white"><i class="fas fa-shopping-cart"></i></span>
+                    <span class="text-white ms-2" id="cartTotal">S/. {{\Cart::subtotal()}}</span></a>
                 </div>
             </nav>
         </div>
     </div>
 </div>
-<!-- Navbar End -->
+<!-- Navbar & Hero End -->
 
- <!-- Breadcrumb Start -->
- <div class="container-fluid">
-    <div class="row px-xl-5">
-        <div class="col-12">
-            <nav class="breadcrumb bg-light mb-30">
-                <a class="breadcrumb-item text-dark" href="#">Inicio</a>
-                <span class="breadcrumb-item active">Contáctanos</span>
-            </nav>
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6 wow fadeInUp" data-wow-delay="0.1s">Contáctanos</h1>
+    <ol class="breadcrumb justify-content-center mb-0 wow fadeInUp" data-wow-delay="0.3s">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item active text-white">Contáctanos</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+
+<!-- Contucts Start -->
+<div class="container-fluid contact py-5">
+    <div class="container py-5">
+        <div class="p-5 bg-light rounded">
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
+                        <h4 class="text-primary border-bottom border-primary border-2 d-inline-block pb-2">Ponte en conmtacto con nosotros</h4>
+                        <p class="mb-5 fs-5 text-dark">¡Estamos aquí para ti! ¿Cómo podemos ayudarte? ¡Estamos aquí para ti!</p>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <h5 class="text-primary wow fadeInUp" data-wow-delay="0.1s">Vamos a conectarnos</h5>
+                    <h1 class="display-5 mb-4 wow fadeInUp" data-wow-delay="0.3s">Envía tu mensaje</h1>
+                    <form>
+                        <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" placeholder="Tu nombre">
+                                    <label for="name">Tu Nombre</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" placeholder="Tu Email">
+                                    <label for="email">Tu Email</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="form-floating">
+                                    <input type="phone" class="form-control" id="phone" placeholder="Phone">
+                                    <label for="phone">Tu Teléfono</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="project" placeholder="Project">
+                                    <label for="project">Tu Proyecto</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <label for="subject">Asunto</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a message here" id="message"
+                                        style="height: 160px"></textarea>
+                                    <label for="message">Mensaje</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3">Enviar Mensaje</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="h-100 rounded">
+                        <iframe class="rounded w-100" style="height: 100%;"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.33750346623!2d-73.97968099999999!3d40.6974881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1694259649153!5m2!1sen!2sbd"
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="row g-4 align-items-center justify-content-center">
+                        <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="rounded p-4">
+                                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-4"
+                                    style="width: 70px; height: 70px;">
+                                    <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4>Address</h4>
+                                    <p class="mb-2">123 Street New York.USA</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="rounded p-4">
+                                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-4"
+                                    style="width: 70px; height: 70px;">
+                                    <i class="fas fa-envelope fa-2x text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4>Mail Us</h4>
+                                    <p class="mb-2">info@example.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="rounded p-4">
+                                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-4"
+                                    style="width: 70px; height: 70px;">
+                                    <i class="fa fa-phone-alt fa-2x text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4>Telephone</h4>
+                                    <p class="mb-2">(+012) 3456 7890</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
+                            <div class="rounded p-4">
+                                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-4"
+                                    style="width: 70px; height: 70px;">
+                                    <i class="fab fa-firefox-browser fa-2x text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4>Yoursite@ex.com</h4>
+                                    <p class="mb-2">(+012) 3456 7890</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<!-- Breadcrumb End -->
+<!-- Contuct End -->
 
 
-<!-- Contact Start -->
-<div class="container-fluid">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Contáctanos</span></h2>
-    <div class="row px-xl-5">
-        <div class="col-lg-7 mb-5">
-            <div class="contact-form bg-light p-30">
-                <div id="success"></div>
-                <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                    <div class="control-group">
-                        <input type="text" class="form-control" id="name" placeholder="Nombre"
-                            required="required" data-validation-required-message="Por favor ingrese su nombre" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        <input type="email" class="form-control" id="email" placeholder="Email"
-                            required="required" data-validation-required-message="Por favor ingrese su correo" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        <input type="text" class="form-control" id="subject" placeholder="Asunto"
-                            required="required" data-validation-required-message="Ingrese el asunto" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        <textarea class="form-control" rows="8" id="message" placeholder="Mensaje..."
-                            required="required"
-                            data-validation-required-message="Ingrese un mensaje"></textarea>
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Enviar mensaje</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="col-lg-5 mb-5">
-            <div class="bg-light p-30 mb-30">
-                <iframe style="width: 100%; height: 250px;"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-                frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-            </div>
-            <div class="bg-light p-30 mb-3">
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>{{$business->address}}</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>{{$business->email}}</p>
-                <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>{{$business->phone}}</p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Contact End -->
 
 @include('partials.footer')
 

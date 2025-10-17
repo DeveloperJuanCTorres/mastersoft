@@ -4,268 +4,561 @@
 
 @include('partials.topbar')
 
-<!-- Navbar Start -->
-<div class="container-fluid bg-dark mb-30">
-    <div class="row px-xl-5">
+<!-- Navbar & Hero Start -->
+<div class="container-fluid nav-bar p-0">
+    <div class="row gx-0 bg-primary px-5 align-items-center py-2">
         <div class="col-lg-3 d-none d-lg-block">
-            <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categorías</h6>
-                <i class="fa fa-angle-down text-dark"></i>
-            </a>
-            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                <div class="navbar-nav w-100">          
-                    @foreach($categories as $category)          
-                    <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
-                    @endforeach
-                    <a href="/store" class="btn btn-primary py-2 px-4 m-2" style="border-radius: 10px;">Más categorías</a>
+            <nav class="navbar navbar-light position-relative" style="width: 250px;">
+                <button class="navbar-toggler border-0 fs-4 w-100 px-0 text-start" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#allCat">
+                    <h4 class="m-0 text-white"><i class="fa fa-bars me-2"></i>Categorías</h4>
+                </button>
+                <div class="collapse navbar-collapse rounded-bottom" id="allCat">
+                    <div class="navbar-nav ms-auto py-0">
+                        <ul class="list-unstyled categories-bars">
+                            @foreach($categories as $category)    
+                            <li>
+                                <div class="categories-bars-item">
+                                    <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
+                                </div>
+                            </li>                            
+                            @endforeach
+                            <a href="/store" class="btn btn-primary py-2 px-4 m-2" style="border-radius: 10px;">Más categorías</a>                            
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </div>
-        <div class="col-lg-9">
-            <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                <a href="" class="text-decoration-none d-block d-lg-none">
+        <div class="col-12 col-lg-9">
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
+                <a href="/" class="navbar-brand d-block d-lg-none">
                     <img height="50" src="{{asset("storage/$business->image")}}" alt="">
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars fa-1x"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto py-0">
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
                         <a href="/" class="nav-item nav-link active">Inicio</a>
                         <a href="/store" class="nav-item nav-link">Tienda</a>
                         <a href="/about" class="nav-item nav-link">Nosotros</a>
-                        <a href="/contact" class="nav-item nav-link">Contáctanos</a>
+                        <a href="/contact" class="nav-item nav-link me-2">Contáctanos</a>
+                        <div class="nav-item dropdown d-block d-lg-none mb-3">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categorías</a>
+                            <div class="dropdown-menu m-0">
+                                <ul class="list-unstyled categories-bars">
+                                    @foreach($categories as $category)    
+                                    <li>
+                                        <div class="categories-bars-item">
+                                            <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
+                                        </div>
+                                    </li>                            
+                                    @endforeach                                    
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="navbar-nav ml-auto py-0 d-lg-block">
-                        <a href="/cart" class="btn px-0 ml-3">
-                            <i class="fas fa-shopping-cart text-primary"></i>
-                            <span id="cartCount" class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
-                                {{\Cart::count()}}
-                            </span>
-                        </a>
-                    </div>
+                    
+                    <a href="/cart" class="text-muted d-flex align-items-center justify-content-center"><span
+                        class="rounded-circle btn-md-square border bg-white"><i class="fas fa-shopping-cart"></i></span>
+                    <span class="text-white ms-2" id="cartTotal">S/. {{\Cart::subtotal()}}</span></a>
                 </div>
             </nav>
         </div>
     </div>
 </div>
-<!-- Navbar End -->
-
+<!-- Navbar & Hero End -->
 
 <!-- Carousel Start -->
-<div class="container-fluid mb-3">
-    <div class="row px-xl-5">
-        <div class="col-lg-8">
-            <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#header-carousel" data-slide-to="1"></li>
-                    <li data-target="#header-carousel" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    @foreach($banners as $key => $banner)
-                        @if($key == 1)
-                        <div class="carousel-item position-relative active" style="height: 430px;">
-                            <img class="position-absolute w-100 h-100" src="storage/{{$banner->image}}">
-                            
-                        </div>
-                        @else
-                        <div class="carousel-item position-relative" style="height: 430px;">
-                            <img class="position-absolute w-100 h-100" src="storage/{{$banner->image}}">
-                            
-                        </div>
-                        @endif
-                    @endforeach
+<div class="container-fluid carousel bg-light px-0">
+    <div class="row g-0 justify-content-end">
+        <div class="col-12 col-lg-7 col-xl-9">
+            <div class="header-carousel owl-carousel bg-light">
+                @foreach($banners as $banner)
+                <div class="row g-0 header-carousel-item align-items-center">
+                    <div class="carousel-img wow fadeInLeft" data-wow-delay="0.1s">
+                        <img src="storage/{{$banner->image}}" class="img-fluid w-100" alt="Image">
+                    </div>
                 </div>
+                @endforeach
             </div>
         </div>
-        <div class="col-lg-4">
-            @foreach($promotions as $promotion)
-            <div class="product-offer mb-30" style="height: 200px;">
-                <img class="img-fluid" src="storage/{{$promotion->image}}" alt="">
-                <div class="offer-text">
-                    <h6 class="text-white text-uppercase">{{$promotion->titulo}}</h6>
-                    <h3 class="text-white mb-3">{{$promotion->description}}</h3>
-                    <!-- <h6 class="text-white text-uppercase">Ahorre un 20%</h6> -->
-                    <!-- <h3 class="text-white mb-3">Oferta especial</h3> -->
-                    <a href="" class="btn btn-primary" style="border-radius: 10px;">Comprar ahora</a>
+        <div class="col-12 col-lg-5 col-xl-3 wow fadeInRight" data-wow-delay="0.1s">
+            <div class="carousel-header-banner h-100">
+                <img src="img/header-img.jpg" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Image">
+                <div class="carousel-banner-offer">
+                    <p class="bg-primary text-white rounded fs-5 py-2 px-4 mb-0 me-3">Save $48.00</p>
+                    <p class="text-primary fs-5 fw-bold mb-0">Special Offer</p>
+                </div>
+                <div class="carousel-banner">
+                    <div class="carousel-banner-content text-center p-4">
+                        <a href="#" class="d-block mb-2">SmartPhone</a>
+                        <a href="#" class="d-block text-white fs-3">Apple iPad Mini <br> G2356</a>
+                        <del class="me-2 text-white fs-5">$1,250.00</del>
+                        <span class="text-primary fs-5">$1,050.00</span>
+                    </div>
+                    <a href="#" class="btn btn-primary rounded-pill py-2 px-4"><i
+                            class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
                 </div>
             </div>
-            @endforeach
         </div>
     </div>
 </div>
 <!-- Carousel End -->
 
-
-<!-- Featured Start -->
-<div class="container-fluid pt-5">
-    <div class="row px-xl-5 pb-3">
-        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-                <h5 class="font-weight-semi-bold m-0">Productos de calidad</h5>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-                <h5 class="font-weight-semi-bold m-0">Envío gratis</h5>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                <h5 class="font-weight-semi-bold m-0">Devolucion en 14 días</h5>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-                <h5 class="font-weight-semi-bold m-0">Soporte 24/7</h5>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Featured End -->
-
-
-<!-- Categories Start -->
-<div class="container-fluid pt-5">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Categorías</span></h2>
-    <div class="row px-xl-5 pb-3">
-        @foreach($categories as $category)
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <a class="text-decoration-none" href="{{ route('store', ['categories' => $category->id]) }}">
-                <div class="cat-item d-flex align-items-center mb-4">
-                    <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                        @if($category->image)
-                        <img class="img-fluid" src="storage/{{$category->image}}" alt="">
-                        @else
-                        <img class="img-fluid" src="img/defectomaster.jpeg" alt="">
-                        @endif
-                    </div>
-                    <div class="flex-fill pl-3">
-                        <h6>{{$category->name}}</h6>
-                        <small class="text-body">{{$category->productsInStock->count()}} productos</small>
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endforeach        
-    </div>
-    <div class="row px-xl-5 pb-3">
-        <div class="d-block m-auto">
-            <a href="/store" class="btn btn-primary py-2 px-4" style="border-radius: 10px;">Más categorías</a>
-        </div>
-    </div>
-</div>
-<!-- Categories End -->
-
-
-<!-- Products Start -->
-<div class="container-fluid pt-5 pb-3">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Nuestros productos</span></h2>
-    <div class="row px-xl-5">
-        @foreach($products as $product)
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
-                <div class="product-img position-relative overflow-hidden">
-                    @php
-                        $imagenes = json_decode($product->images)
-                    @endphp
-                    @if($imagenes)
-                    <img class="img-fluid w-100" src="storage/{{$imagenes[0]}}" alt="">
-                    @else
-                    <img class="img-fluid w-100" src="img/defectomaster.jpeg" alt="">
-                    @endif
-                    <div class="product-action">
-                        <input type="hidden" id="qty" value="1">
-                        <a class="btn btn-outline-dark addcart" href="javascript:void(0)" data-id="{{$product->id}}">
-                            <i class="fa fa-shopping-cart"></i>
-                            Agregar al carrito
-                        </a>
-                        <a class="btn btn-outline-dark" href="{{route('product.detail', $product)}}">
-                            <i class="fa fa-search"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href="{{route('product.detail', $product)}}">{{$product->name}}</a>
-                    <div class="d-flex align-items-center justify-content-center mt-2">
-                        <h5>S/. {{$product->price}}</h5><h6 class="text-muted ml-2"><del>S/. {{$product->price*1.20}}</del></h6>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center mb-1">
-                        <small>Stock ({{$product->stock}} {{$product->unidad_medida}})</small>
+<!-- Searvices Start -->
+<div class="container-fluid px-0">
+    <div class="row g-0">
+        <div class="col-6 col-md-4 col-lg-3 border-start border-end wow fadeInUp" data-wow-delay="0.1s">
+            <div class="p-4">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-sync-alt fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Devolución Gratuita</h6>
+                        <p class="mb-0">¡Garantía de devolución de dinero de 30 días!</p>
                     </div>
                 </div>
             </div>
         </div>
-        @endforeach        
-    </div>    
-    <div class="row px-xl-5">
-        <div class="d-block m-auto">
-            <a href="/store" class="btn btn-primary py-2 px-4" style="border-radius: 10px;">Más productos</a>
-        </div>
-    </div>
-</div>
-<!-- Products End -->
-
-
-<!-- Offer Start -->
-<div class="container-fluid pt-5 pb-3">
-    <div class="row px-xl-5">
-        @foreach($promotions as $promotion)
-        <div class="col-md-6">
-            <div class="product-offer mb-30" style="height: 300px;">
-                <img class="img-fluid" src="storage/{{$promotion->image}}" alt="">
-                <div class="offer-text">
-                    <!-- <h6 class="text-white text-uppercase">Ahorre un 20%</h6>
-                    <h3 class="text-white mb-3">Oferta especial</h3> -->
-                    <a href="" class="btn btn-primary" style="border-radius: 10px;">Comprar ahora</a>
+        <div class="col-6 col-md-4 col-lg-3 border-end wow fadeInUp" data-wow-delay="0.2s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fab fa-telegram-plane fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Envío Gratis</h6>
+                        <p class="mb-0">Envío gratuito en todos los pedidos.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        @endforeach
+        <div class="col-6 col-md-4 col-lg-3 border-end wow fadeInUp" data-wow-delay="0.3s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-life-ring fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Soporte 24/7</h6>
+                        <p class="mb-0">Brindamos soporte en línea las 24 horas del día.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.4s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-credit-card fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Recibir tarjeta de regalo</h6>
+                        <p class="mb-0">Reciba un regalo en pedidos superiores a S/. 500</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.5s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-lock fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Pago Seguro</h6>
+                        <p class="mb-0">Valoramos su seguridad</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-6 col-md-4 col-lg-3 border-end wow fadeInUp" data-wow-delay="0.6s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-blog fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Servicio en Línea</h6>
+                        <p class="mb-0">Devolución gratuita de productos en 30 días</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<!-- Offer End -->
+<!-- Searvices End -->
 
+<!-- Products Offer Start -->
+<div class="container-fluid bg-light py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                    <div>
+                        <p class="text-muted mb-3">¡Encuentra la mejor camara para ti!</p>
+                        <h3 class="text-primary">Camara inteligente</h3>
+                        <h1 class="display-3 text-secondary mb-0">40% <span
+                                class="text-primary fw-normal">Off</span></h1>
+                    </div>
+                    <img src="img/product-1.png" class="img-fluid" alt="">
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
+                <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                    <div>
+                        <p class="text-muted mb-3">Find The Best Whatches for You!</p>
+                        <h3 class="text-primary">Smart Whatch</h3>
+                        <h1 class="display-3 text-secondary mb-0">20% <span
+                                class="text-primary fw-normal">Off</span></h1>
+                    </div>
+                    <img src="img/product-2.png" class="img-fluid" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Products Offer End -->
 
-<!-- Vendor Start -->
+<!-- Our Products Start -->
+<div class="container-fluid product py-5">
+    <div class="container py-5">
+        <div class="tab-class">
+            <div class="row g-4">
+                <div class="col-lg-4 text-start wow fadeInLeft" data-wow-delay="0.1s">
+                    <h1>Nuestros Productos</h1>
+                </div>
+                <div class="col-lg-8 text-end wow fadeInRight" data-wow-delay="0.1s">
+                    <ul class="nav nav-pills d-inline-flex text-center mb-5">
+                        <li class="nav-item mb-4">
+                            <a class="d-flex mx-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill"
+                                href="#tab-1">
+                                <span class="text-dark" style="width: 130px;">Destacados</span>
+                            </a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div class="row g-4">
+                        @foreach($products as $product)
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="product-item-inner border rounded">
+                                    <div class="product-item-inner-item" style="height: 250px; display: flex; justify-content: center; align-items: center; overflow: hidden; background-color: #f8f8f8;"">
+                                        @php
+                                            $imagenes = json_decode($product->images)
+                                        @endphp
+                                        @if($imagenes)
+                                        <img src="storage/{{$imagenes[0]}}" class="product-image" alt="">
+                                        @else
+                                        <img src="img/defectomaster.jpeg" class="product-image" alt="">
+                                        @endif
+                                        <div class="product-new">Nuevo</div>
+                                        <div class="product-details">
+                                            <a href="{{route('product.detail', $product)}}"><i class="fa fa-eye fa-1x"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="text-center rounded-bottom p-4">
+                                        <a href="{{route('product.detail', $product)}}" class="d-block mb-2">{{$product->taxonomy->name}}</a>
+                                        <a href="#" class="d-block h5 product-name">{{ Str::limit($product->name, 40, '...') }}</a>
+                                        <del class="me-2 fs-5">S/. {{$product->price*1.20}}</del>
+                                        <span class="text-primary fs-5">S/. {{$product->price}}</span>
+                                    </div>
+                                </div>
+                                <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
+                                    <input type="hidden" id="qty" value="1">
+                                    <a href="javascript:void(0)" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4 addcart" data-id="{{$product->id}}">
+                                        <i class="fas fa-shopping-cart me-2"></i> 
+                                        Agregar al carrito
+                                    </a>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex">
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="d-flex">
+                                            <a href="#"
+                                                class="text-primary d-flex align-items-center justify-content-center me-3"><span
+                                                    class="rounded-circle btn-sm-square border"><i
+                                                        class="fas fa-random"></i></i></a>
+                                            <a href="#"
+                                                class="text-primary d-flex align-items-center justify-content-center me-0"><span
+                                                    class="rounded-circle btn-sm-square border"><i
+                                                        class="fas fa-heart"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Our Products End -->
+
+<!-- Product Banner Start -->
 <div class="container-fluid py-5">
-    <div class="row px-xl-5">
-        <div class="col">
-            <div class="owl-carousel vendor-carousel">
-                <div class="bg-light p-4">
-                    <img src="img/vendor-1.jpg" alt="">
+    <div class="container">
+        <div class="row g-4">
+            @foreach($promotions as $promotion)
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <a href="#">
+                    <div class="bg-primary rounded position-relative">
+                        <img src="storage/{{$promotion->image}}" class="img-fluid w-100 rounded" alt="">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4">
+                            <!-- <h3 class="display-5 text-primary">EOS Rebel <br> <span>T7i Kit</span></h3> -->
+                            <!-- <p class="fs-4 text-muted">$899.99</p> -->
+                            <a href="#" class="btn btn-primary rounded-pill align-self-start py-2 px-4">Comprar ahora</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            @endforeach
+            <!-- <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                <a href="#">
+                    <div class="text-center bg-primary rounded position-relative">
+                        <img src="img/product-banner-2.jpg" class="img-fluid w-100" alt="">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
+                            style="background: rgba(242, 139, 0, 0.5);">
+                            <h2 class="display-2 text-secondary">SALE</h2>
+                            <h4 class="display-5 text-white mb-4">Get UP To 50% Off</h4>
+                            <a href="#" class="btn btn-secondary rounded-pill align-self-center py-2 px-4">Shop
+                                Now</a>
+                        </div>
+                    </div>
+                </a>
+            </div> -->
+        </div>
+    </div>
+</div>
+<!-- Product Banner End -->
+
+ <!-- Bestseller Products Start -->
+<div class="container-fluid products pb-5">
+    <div class="container products-mini py-5">
+        <div class="mx-auto text-center mb-5" style="max-width: 700px;">
+            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp"
+                data-wow-delay="0.1s">Productos más vendidos</h4>
+            <p class="mb-0 wow fadeInUp" data-wow-delay="0.2s">Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Modi, asperiores ducimus sint quos tempore officia similique quia? Libero, pariatur
+                consectetur?</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="products-mini-item border">
+                    <div class="row g-0">
+                        <div class="col-5">
+                            <div class="products-mini-img border-end h-100">
+                                <img src="img/product-3.png" class="img-fluid w-100 h-100" alt="Image">
+                                <div class="products-mini-icon rounded-circle bg-primary">
+                                    <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="products-mini-content p-3">
+                                <a href="#" class="d-block mb-2">SmartPhone</a>
+                                <a href="#" class="d-block h4">Apple iPad Mini <br> G2356</a>
+                                <del class="me-2 fs-5">$1,250.00</del>
+                                <span class="text-primary fs-5">$1,050.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-mini-add border p-3">
+                        <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4"><i
+                                class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
+                        <div class="d-flex">
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-3"><span
+                                    class="rounded-circle btn-sm-square border"><i
+                                        class="fas fa-random"></i></i></a>
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-0"><span
+                                    class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-light p-4">
-                    <img src="img/vendor-2.jpg" alt="">
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="products-mini-item border">
+                    <div class="row g-0">
+                        <div class="col-5">
+                            <div class="products-mini-img border-end h-100">
+                                <img src="img/product-4.png" class="img-fluid w-100 h-100" alt="Image">
+                                <div class="products-mini-icon rounded-circle bg-primary">
+                                    <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="products-mini-content p-3">
+                                <a href="#" class="d-block mb-2">SmartPhone</a>
+                                <a href="#" class="d-block h4">Apple iPad Mini <br> G2356</a>
+                                <del class="me-2 fs-5">$1,250.00</del>
+                                <span class="text-primary fs-5">$1,050.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-mini-add border p-3">
+                        <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4"><i
+                                class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
+                        <div class="d-flex">
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-3"><span
+                                    class="rounded-circle btn-sm-square border"><i
+                                        class="fas fa-random"></i></i></a>
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-0"><span
+                                    class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-light p-4">
-                    <img src="img/vendor-3.jpg" alt="">
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="products-mini-item border">
+                    <div class="row g-0">
+                        <div class="col-5">
+                            <div class="products-mini-img border-end h-100">
+                                <img src="img/product-5.png" class="img-fluid w-100 h-100" alt="Image">
+                                <div class="products-mini-icon rounded-circle bg-primary">
+                                    <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="products-mini-content p-3">
+                                <a href="#" class="d-block mb-2">SmartPhone</a>
+                                <a href="#" class="d-block h4">Apple iPad Mini <br> G2356</a>
+                                <del class="me-2 fs-5">$1,250.00</del>
+                                <span class="text-primary fs-5">$1,050.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-mini-add border p-3">
+                        <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4"><i
+                                class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
+                        <div class="d-flex">
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-3"><span
+                                    class="rounded-circle btn-sm-square border"><i
+                                        class="fas fa-random"></i></i></a>
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-0"><span
+                                    class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-light p-4">
-                    <img src="img/vendor-4.jpg" alt="">
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="products-mini-item border">
+                    <div class="row g-0">
+                        <div class="col-5">
+                            <div class="products-mini-img border-end h-100">
+                                <img src="img/product-6.png" class="img-fluid w-100 h-100" alt="Image">
+                                <div class="products-mini-icon rounded-circle bg-primary">
+                                    <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="products-mini-content p-3">
+                                <a href="#" class="d-block mb-2">SmartPhone</a>
+                                <a href="#" class="d-block h4">Apple iPad Mini <br> G2356</a>
+                                <del class="me-2 fs-5">$1,250.00</del>
+                                <span class="text-primary fs-5">$1,050.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-mini-add border p-3">
+                        <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4"><i
+                                class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
+                        <div class="d-flex">
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-3"><span
+                                    class="rounded-circle btn-sm-square border"><i
+                                        class="fas fa-random"></i></i></a>
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-0"><span
+                                    class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-light p-4">
-                    <img src="img/vendor-5.jpg" alt="">
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="products-mini-item border">
+                    <div class="row g-0">
+                        <div class="col-5">
+                            <div class="products-mini-img border-end h-100">
+                                <img src="img/product-7.png" class="img-fluid w-100 h-100" alt="Image">
+                                <div class="products-mini-icon rounded-circle bg-primary">
+                                    <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="products-mini-content p-3">
+                                <a href="#" class="d-block mb-2">SmartPhone</a>
+                                <a href="#" class="d-block h4">Apple iPad Mini <br> G2356</a>
+                                <del class="me-2 fs-5">$1,250.00</del>
+                                <span class="text-primary fs-5">$1,050.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-mini-add border p-3">
+                        <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4"><i
+                                class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
+                        <div class="d-flex">
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-3"><span
+                                    class="rounded-circle btn-sm-square border"><i
+                                        class="fas fa-random"></i></i></a>
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-0"><span
+                                    class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-light p-4">
-                    <img src="img/vendor-6.jpg" alt="">
-                </div>
-                <div class="bg-light p-4">
-                    <img src="img/vendor-7.jpg" alt="">
-                </div>
-                <div class="bg-light p-4">
-                    <img src="img/vendor-8.jpg" alt="">
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="products-mini-item border">
+                    <div class="row g-0">
+                        <div class="col-5">
+                            <div class="products-mini-img border-end h-100">
+                                <img src="img/product-11.png" class="img-fluid w-100 h-100" alt="Image">
+                                <div class="products-mini-icon rounded-circle bg-primary">
+                                    <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="products-mini-content p-3">
+                                <a href="#" class="d-block mb-2">SmartPhone</a>
+                                <a href="#" class="d-block h4">Apple iPad Mini <br> G2356</a>
+                                <del class="me-2 fs-5">$1,250.00</del>
+                                <span class="text-primary fs-5">$1,050.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-mini-add border p-3">
+                        <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4"><i
+                                class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
+                        <div class="d-flex">
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-3"><span
+                                    class="rounded-circle btn-sm-square border"><i
+                                        class="fas fa-random"></i></i></a>
+                            <a href="#"
+                                class="text-primary d-flex align-items-center justify-content-center me-0"><span
+                                    class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Vendor End -->
+<!-- Bestseller Products End -->
+
 
 @include('partials.footer')
 

@@ -32,7 +32,10 @@ class CartController extends Controller
                 ["image"=>$img]
             );
 
-            return response()->json(['status' => true, 'msg' => 'Porducto se agrego a su carrito', 'count' => Cart::count()]);
+            return response()->json(['status' => true, 
+                                    'msg' => 'Porducto se agrego a su carrito', 
+                                    'count' => Cart::count(), 
+                                    'total' => Cart::subtotal()]);
 
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'msg' => $th->getMessage()]);

@@ -4,263 +4,262 @@
 
 @include('partials.topbar')
 
-<!-- Navbar Start -->
-<div class="container-fluid bg-dark mb-30">
-    <div class="row px-xl-5">
+<!-- Navbar & Hero Start -->
+<div class="container-fluid nav-bar p-0">
+    <div class="row gx-0 bg-primary px-5 align-items-center py-2">
         <div class="col-lg-3 d-none d-lg-block">
-            <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categorías</h6>
-                <i class="fa fa-angle-down text-dark"></i>
-            </a>
-            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                <div class="navbar-nav w-100">          
-                    @foreach($categories as $category)          
-                    <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
-                    @endforeach
-                    <a href="/store" class="btn btn-primary py-2 px-4 m-2" style="border-radius: 10px;">Más categorías</a>
+            <nav class="navbar navbar-light position-relative" style="width: 250px;">
+                <button class="navbar-toggler border-0 fs-4 w-100 px-0 text-start" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#allCat">
+                    <h4 class="m-0 text-white"><i class="fa fa-bars me-2"></i>Categorías</h4>
+                </button>
+                <div class="collapse navbar-collapse rounded-bottom" id="allCat">
+                    <div class="navbar-nav ms-auto py-0">
+                        <ul class="list-unstyled categories-bars">
+                            @foreach($categories as $category)    
+                            <li>
+                                <div class="categories-bars-item">
+                                    <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
+                                </div>
+                            </li>                            
+                            @endforeach
+                            <a href="/store" class="btn btn-primary py-2 px-4 m-2" style="border-radius: 10px;">Más categorías</a>                            
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </div>
-        <div class="col-lg-9">
-            <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                <a href="" class="text-decoration-none d-block d-lg-none">
+        <div class="col-12 col-lg-9">
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
+                <a href="/" class="navbar-brand d-block d-lg-none">
                     <img height="50" src="{{asset("storage/$business->image")}}" alt="">
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars fa-1x"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto py-0">
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
                         <a href="/" class="nav-item nav-link">Inicio</a>
                         <a href="/store" class="nav-item nav-link">Tienda</a>
-                        <a href="/about" class="nav-item nav-link">Nosotros</a>
-                        <a href="/contact" class="nav-item nav-link">Contáctanos</a>
+                        <a href="/about" class="nav-item nav-link active">Nosotros</a>
+                        <a href="/contact" class="nav-item nav-link me-2">Contáctanos</a>
+                        <div class="nav-item dropdown d-block d-lg-none mb-3">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categorías</a>
+                            <div class="dropdown-menu m-0">
+                                <ul class="list-unstyled categories-bars">
+                                    @foreach($categories as $category)    
+                                    <li>
+                                        <div class="categories-bars-item">
+                                            <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
+                                        </div>
+                                    </li>                            
+                                    @endforeach                                    
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                        <!-- <a href="" class="btn px-0">
-                            <i class="fas fa-heart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a> -->
-                        <a href="/cart" class="btn px-0 ml-3">
-                            <i class="fas fa-shopping-cart text-primary"></i>
-                            <span id="cartCount" class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
-                                {{\Cart::count()}}
-                            </span>
-                        </a>
-                    </div>
+                    
+                    <a href="/cart" class="text-muted d-flex align-items-center justify-content-center"><span
+                        class="rounded-circle btn-md-square border bg-white"><i class="fas fa-shopping-cart"></i></span>
+                    <span class="text-white ms-2" id="cartTotal">S/. {{\Cart::subtotal()}}</span></a>
                 </div>
             </nav>
         </div>
     </div>
 </div>
-<!-- Navbar End -->
+<!-- Navbar & Hero End -->
 
-<!-- Breadcrumb Start -->
-<div class="container-fluid">
-    <div class="row px-xl-5">
-        <div class="col-12">
-            <nav class="breadcrumb bg-light mb-30">
-                <a class="breadcrumb-item text-dark" href="/">Inicio</a>
-                <span class="breadcrumb-item active">Checkout</span>
-            </nav>
-        </div>
-    </div>
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6 wow fadeInUp" data-wow-delay="0.1s">Carrito de compras</h1>
+    <ol class="breadcrumb justify-content-center mb-0 wow fadeInUp" data-wow-delay="0.3s">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item active text-white">Carrito</li>
+    </ol>
 </div>
-<!-- Breadcrumb End -->
+<!-- Single Page Header End -->
 
-
-<!-- Checkout Start -->
-<div class="container-fluid">
-    <div class="row px-xl-5">
-        <div class="col-lg-8">
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
-            <div class="bg-light p-30 mb-5">
-                <div class="row">
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" id="tipo_cliente" name="tipo_cliente" value="natural" checked onclick="mostrarCampos()">Natural
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" id="tipo_cliente" name="tipo_cliente" value="empresa" onclick="mostrarCampos()">Empresa
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12" id="campo_cliente">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label>Nombre</label>
-                                <input class="form-control" type="text" id="nombre" name="nombre" placeholder="John">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Apellidos</label>
-                                <input class="form-control" type="text" id="apellidos" name="apellidos" placeholder="Doe">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12" style="display: none;" id="campo_empresa">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label>RUC</label>
-                                <input class="form-control" type="text" id="ruc" name="ruc">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Razon social</label>
-                                <input class="form-control" type="text" id="company" name="company">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>Email</label>
-                        <input class="form-control" type="text" id="email" name="email" placeholder="example@email.com">
-                    </div>
-                    <div class="col-md-6 form-group">
-                        @include('partials.phone')
-                    </div>
-                    <div class="col-md-12 form-group">
-                        <label>Dirección</label>
-                        <input class="form-control" type="text" id="direccion" name="direccion" placeholder="123 Street">
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>Departamento</label>
-                        <select id="departamento" class="form-control departamento" name="mauticform[departamento]">    
-                            <option data-id="" value="">-Seleccionar-</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>Provincia</label>
-                        <select id="provincia" class="form-control provincia" name="mauticform[provincia1]">
-                            <option data-id="" value="Chachapoyas">-Seleccionar-</option>                
-                        </select>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>Distrito</label>
-                        <select id="distrito" class="form-control distrito" name="mauticform[distrito1]">
-                            <option data-id="" value="">-Seleccionar-</option>
-                        </select>
-                    </div>
-                    <!-- <div class="col-md-12 form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="newaccount">
-                            <label class="custom-control-label" for="newaccount">Create an account</label>
-                        </div>
-                    </div> -->
-                    <!-- <div class="col-md-12">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="shipto">
-                            <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-            <div class="collapse mb-5" id="shipping-address">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Shipping Address</span></h5>
-                <div class="bg-light p-30">
+<!-- Checkout Page Start -->
+<div class="container-fluid bg-light overflow-hidden py-5">
+    <div class="container py-5">
+        <h1 class="mb-4 wow fadeInUp" data-wow-delay="0.1s">Detalles de facturación</h1>
+        <form action="#">
+            <div class="row g-5">
+                <div class="col-md-12 col-lg-6 col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="John">
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="radio" id="tipo_cliente" name="tipo_cliente" value="natural" style="width: 15px;height: 15px;" checked onclick="mostrarCampos()"> <span class="px-2">Natural</span>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="radio" id="tipo_cliente" name="tipo_cliente" value="empresa" style="width: 15px;height: 15px;" onclick="mostrarCampos()"><span class="px-2">Empresa</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" id="campo_cliente">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label class="form-label my-3">Nombre</label>
+                                    <input class="form-control" type="text" id="nombre" name="nombre" placeholder="John">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="form-label my-3">Apellidos</label>
+                                    <input class="form-control" type="text" id="apellidos" name="apellidos" placeholder="Doe">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="display: none;" id="campo_empresa">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label class="form-label my-3">RUC</label>
+                                    <input class="form-control" type="text" id="ruc" name="ruc">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="form-label my-3">Razon social</label>
+                                    <input class="form-control" type="text" id="company" name="company">
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Doe">
+                            <label class="form-label my-3">Email</label>
+                            <input class="form-control" type="text" id="email" name="email" placeholder="example@email.com">
+                        </div>
+                        <div class="col-md-6 form-group pt-5">
+                            <!-- <label class="form-label my-3">Teléfono</label> -->
+                            @include('partials.phone')
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label class="form-label my-3">Dirección</label>
+                            <input class="form-control" type="text" id="direccion" name="direccion" placeholder="123 Street">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>E-mail</label>
-                            <input class="form-control" type="text" placeholder="example@email.com">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" placeholder="+123 456 789">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 1</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 2</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Country</label>
-                            <select class="custom-select">
-                                <option selected>United States</option>
-                                <option>Afghanistan</option>
-                                <option>Albania</option>
-                                <option>Algeria</option>
+                            <label class="form-label my-3">Departamento</label>
+                            <select id="departamento" class="form-control departamento" name="mauticform[departamento]">    
+                                <option data-id="" value="">-Seleccionar-</option>
                             </select>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>City</label>
-                            <input class="form-control" type="text" placeholder="New York">
+                            <label class="form-label my-3">Provincia</label>
+                            <select id="provincia" class="form-control provincia" name="mauticform[provincia1]">
+                                <option data-id="" value="Chachapoyas">-Seleccionar-</option>                
+                            </select>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>State</label>
-                            <input class="form-control" type="text" placeholder="New York">
+                            <label class="form-label my-3">Distrito</label>
+                            <select id="distrito" class="form-control distrito" name="mauticform[distrito1]">
+                                <option data-id="" value="">-Seleccionar-</option>
+                            </select>
                         </div>
-                        <div class="col-md-6 form-group">
-                            <label>ZIP Code</label>
-                            <input class="form-control" type="text" placeholder="123">
+                    </div>
+                    
+                    <div class="form-item pt-4">
+                        <textarea name="text" class="form-control" spellcheck="false" cols="30" rows="5"
+                            placeholder="Oreder Notes (Optional)"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr class="text-center">
+                                    <th scope="col" class="text-start">Producto</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Cant.</th>
+                                    <th scope="col" style="width: 100px;">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(Cart::content() as $item)
+                                <tr class="text-center">
+                                    <th scope="row" class="text-start py-4">
+                                        {{$item->name}}
+                                    </th>
+                                    <td class="py-4">$269.00</td>
+                                    <td class="py-4 text-center">2</td>
+                                    <td class="py-4">$538.00</td>
+                                </tr>
+                                @endforeach
+                                <tr>
+                                    <th scope="row">
+                                    </th>
+                                    <td class=""></td>
+                                    <td class="">
+                                        <p class="mb-0 text-dark py-2">Subtotal</p>
+                                    </td>
+                                    <td class="">
+                                        <div class="py-2 text-center border-bottom border-top">
+                                            <p class="mb-0 text-dark">S/. {{number_format(Cart::subtotal()/1.18,2)}}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                    </th>
+                                    <td class=""></td>
+                                    <td class="">
+                                        <p class="mb-0 text-dark py-2">IGV</p>
+                                    </td>
+                                    <td class="">
+                                        <div class="py-2 text-center border-bottom border-top">
+                                            <p class="mb-0 text-dark">S/. {{number_format(Cart::subtotal() - Cart::subtotal()/1.18,2)}}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                    </th>
+                                    <td class=""></td>
+                                    <td class="">
+                                        <p class="mb-0 text-dark text-uppercase py-2">TOTAL</p>
+                                    </td>                                    
+                                    <td class="">
+                                        <div class="py-2 text-center border-bottom border-top">
+                                            <p class="mb-0 text-dark">S/. {{number_format(Cart::subtotal(),2)}}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row g-0 text-center align-items-center justify-content-center border-bottom py-2">
+                        <div class="col-12">
+                            <div class="form-check text-start my-2">
+                                <input type="checkbox" class="form-check-input bg-primary border-0" id="Transfer-1"
+                                    name="Transfer" value="Transfer">
+                                <label class="form-check-label" for="Transfer-1">Transferencia bancaria</label>
+                            </div>
                         </div>
+                    </div>
+                    <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-2">
+                        <div class="col-12">
+                            <div class="form-check text-start my-2">
+                                <input type="checkbox" class="form-check-input bg-primary border-0" id="Delivery-1"
+                                    name="Delivery" value="Delivery">
+                                <label class="form-check-label" for="Delivery-1">Pago contra entrega</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-2">
+                        <div class="col-12">
+                            <div class="form-check text-start my-2">
+                                <input type="checkbox" class="form-check-input bg-primary border-0" id="Paypal-1"
+                                    name="Paypal" value="Paypal">
+                                <label class="form-check-label" for="Paypal-1">Paypal</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                        <button type="button"
+                            class="btn btn-primary border-secondary py-3 px-4 text-uppercase w-100 text-primary pedido">Realizar pedido</button>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4">
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Total del pedido</span></h5>
-            <div class="bg-light p-30 mb-5">
-                <div class="border-bottom">
-                    <h6 class="mb-3">Productos</h6>
-                    @foreach(Cart::content() as $item)
-                    <div class="d-flex justify-content-between">
-                        <p>[ x{{$item->qty}} ] - {{$item->name}}</p>
-                        <p style="width: 220px;text-align: end;">S/. {{number_format($item->price * $item->qty, 2)}}</p>
-                    </div>
-                    @endforeach
-                </div>
-                <div class="border-bottom pt-3 pb-2">
-                    <div class="d-flex justify-content-between mb-3">
-                        <h6>Subtotal</h6>
-                        <h6>S/. {{number_format(Cart::subtotal() - Cart::subtotal()*0.18,2)}}</h6>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <h6 class="font-weight-medium">IGV</h6>
-                        <h6 class="font-weight-medium">S/. {{number_format(Cart::subtotal()*0.18,2)}}</h6>
-                    </div>
-                </div>
-                <div class="pt-2">
-                    <div class="d-flex justify-content-between mt-2">
-                        <h5>Total</h5>
-                        <h5>S/. {{number_format(Cart::subtotal(),2)}}</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-5">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Pago</span></h5>
-                <div class="bg-light p-30">
-                    <div class="form-group">
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                            <label class="custom-control-label" for="paypal">Paypal</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="payment" id="directcheck">
-                            <label class="custom-control-label" for="directcheck">Direct Check</label>
-                        </div>
-                    </div>
-                    <div class="form-group mb-4">
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                            <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
-                        </div>
-                    </div>
-                    <button class="btn btn-block btn-primary font-weight-bold py-3 pedido">Realizar pedido</button>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
-<!-- Checkout End -->
+<!-- Checkout Page End -->
+
 
 @include('partials.footer')
 

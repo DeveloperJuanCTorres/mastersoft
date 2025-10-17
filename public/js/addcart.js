@@ -27,7 +27,8 @@
                 },
                 success: function (response) {   
                     if (response.status) {
-						document.getElementById('cartCount').innerText = response.count;
+                        console.log(response)
+						document.getElementById('cartTotal').innerText = 'S/. ' + response.total;
 						
                         const Toast = Swal.mixin({
 						toast: true,
@@ -43,7 +44,8 @@
 						Toast.fire({
 						icon: "success",
 						title: response.msg
-						});               
+						});      
+                        document.body.style.paddingRight = '0';         
                     } else {
                         const Toast = Swal.mixin({
 						toast: true,
