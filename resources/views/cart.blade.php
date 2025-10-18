@@ -111,21 +111,21 @@
                                 <td>
                                     <div class="input-group quantity py-2" style="width: 100px;">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border" data-rowid="{{ $item->rowId }}">
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
-                                        <input type="text" class="form-control form-control-sm text-center border-0"
-                                            value="{{$item->qty}}">
+                                        <input type="text" class="form-control form-control-sm text-center border-0 qty-input"
+                                            value="{{$item->qty}}" data-rowid="{{ $item->rowId }}">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border" data-rowid="{{ $item->rowId }}">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="mb-0 py-2">S/. {{$item->price*$item->qty}}</p>
+                                    <p class="mb-0 py-2 subtotal-item" data-rowid="{{ $item->rowId }}">S/. {{ number_format($item->price * $item->qty, 2) }}</p>
                                 </td>
                                 <td class="">
                                     <form action="{{route('removeitem')}}" method="post">
@@ -154,21 +154,21 @@
 
                 <div class="bg-light rounded">
                     <div class="p-4">
-                        <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                        <h4 class="display-6 mb-4">Total de carrito</h4>
                         <div class="d-flex justify-content-between mb-4">
                             <h5 class="mb-0 me-4">Subtotal:</h5>
-                            <p class="mb-0">S/. {{number_format(Cart::subtotal()/1.18,2)}}</p>
+                            <p class="mb-0" id="subtotal-general">S/. {{number_format(Cart::subtotal()/1.18,2)}}</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h5 class="mb-0 me-4">IGV</h5>
                             <div>
-                                <p class="mb-0">S/. {{number_format(Cart::subtotal() - Cart::subtotal()/1.18,2)}}</p>
+                                <p class="mb-0" id="igv">S/. {{number_format(Cart::subtotal() - Cart::subtotal()/1.18,2)}}</p>
                             </div>
                         </div>
                     </div>
                     <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                         <h5 class="mb-0 ps-4 me-4">Total</h5>
-                        <p class="mb-0 pe-4">S/. {{number_format(Cart::subtotal(),2)}}</p>
+                        <p class="mb-0 pe-4" id="cart-total">S/. {{number_format(Cart::subtotal(),2)}}</p>
                     </div>
                     <a href="/checkout" class="btn btn-primary rounded-pill px-4 py-3 text-uppercase mb-4 w-100"
                         type="button">Ir a pagar</a>
@@ -191,5 +191,46 @@
 
 
 @include('partials.footer')
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on('click', '.btn-plus, .btn-minus', function(e) {
+        e.preventDefault();
+        let input = $(this).closest('.quantity').find('.qty-input');
+        let rowId = input.data('rowid');
+        let qty   = parseInt(input.val());
+
+        if ($(this).hasClass('btn-plus')) {
+            qty++;
+        } else {
+            if (qty > 1) qty--;
+        }
+
+        input.val(qty);
+
+        // AJAX para actualizar carrito
+        $.ajax({
+            url: "{{ route('cart.update') }}",
+            method: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                rowId: rowId,
+                qty: qty
+            },
+            success: function(response) {
+                if (response.success) {
+                    // actualizar subtotal del item
+                    $(`.subtotal-item[data-rowid='${rowId}']`).text('S/. ' + response.subtotalItem);
+
+                    // actualizar resumen
+                    $("#subtotal-general").text('S/. ' + response.subtotalGeneral);
+                    $("#igv").text('S/. ' + response.igv);
+                    $("#cart-total").text('S/. ' + response.total);
+                    $("#cartTotal").text('S/. ' + response.total);
+                }
+            }
+        });
+    });
+</script>
 
 @endsection

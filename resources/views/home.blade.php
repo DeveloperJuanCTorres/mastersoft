@@ -74,7 +74,7 @@
 <!-- Carousel Start -->
 <div class="container-fluid carousel bg-light px-0">
     <div class="row g-0 justify-content-end">
-        <div class="col-12 col-lg-7 col-xl-9">
+        <div class="col-12 col-lg-9 col-xl-9">
             <div class="header-carousel owl-carousel bg-light">
                 @foreach($banners as $banner)
                 <div class="row g-0 header-carousel-item align-items-center">
@@ -85,23 +85,9 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-12 col-lg-5 col-xl-3 wow fadeInRight" data-wow-delay="0.1s">
+        <div class="col-12 col-lg-3 col-xl-3 wow fadeInRight" data-wow-delay="0.1s">
             <div class="carousel-header-banner h-100">
-                <img src="img/header-img.jpg" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Image">
-                <div class="carousel-banner-offer">
-                    <p class="bg-primary text-white rounded fs-5 py-2 px-4 mb-0 me-3">Save $48.00</p>
-                    <p class="text-primary fs-5 fw-bold mb-0">Special Offer</p>
-                </div>
-                <div class="carousel-banner">
-                    <div class="carousel-banner-content text-center p-4">
-                        <a href="#" class="d-block mb-2">SmartPhone</a>
-                        <a href="#" class="d-block text-white fs-3">Apple iPad Mini <br> G2356</a>
-                        <del class="me-2 text-white fs-5">$1,250.00</del>
-                        <span class="text-primary fs-5">$1,050.00</span>
-                    </div>
-                    <a href="#" class="btn btn-primary rounded-pill py-2 px-4"><i
-                            class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
-                </div>
+                <img src="storage/{{$business->banner}}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Image">
             </div>
         </div>
     </div>
@@ -181,36 +167,26 @@
 </div>
 <!-- Searvices End -->
 
-<!-- Products Offer Start -->
-<div class="container-fluid bg-light py-5">
+<!-- Product Banner Start -->
+<div class="container-fluid py-5">
     <div class="container">
         <div class="row g-4">
-            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
-                <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
-                    <div>
-                        <p class="text-muted mb-3">¡Encuentra la mejor camara para ti!</p>
-                        <h3 class="text-primary">Camara inteligente</h3>
-                        <h1 class="display-3 text-secondary mb-0">40% <span
-                                class="text-primary fw-normal">Off</span></h1>
+            @foreach($promotions as $promotion)
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <a href="#">
+                    <div class="bg-primary rounded position-relative">
+                        <img src="storage/{{$promotion->image}}" class="img-fluid w-100 rounded" alt="">
+                        <div class="position-absolute bottom-0 start-50 translate-middle-x mb-3">
+                            <a href="{{route('product.detail', $promotion->product)}}" class="btn btn-primary rounded-pill py-2 px-4">Comprar ahora</a>
+                        </div>
                     </div>
-                    <img src="img/product-1.png" class="img-fluid" alt="">
                 </a>
             </div>
-            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
-                <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
-                    <div>
-                        <p class="text-muted mb-3">Find The Best Whatches for You!</p>
-                        <h3 class="text-primary">Smart Whatch</h3>
-                        <h1 class="display-3 text-secondary mb-0">20% <span
-                                class="text-primary fw-normal">Off</span></h1>
-                    </div>
-                    <img src="img/product-2.png" class="img-fluid" alt="">
-                </a>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
-<!-- Products Offer End -->
+<!-- Product Banner End -->
 
 <!-- Our Products Start -->
 <div class="container-fluid product py-5">
@@ -295,43 +271,6 @@
     </div>
 </div>
 <!-- Our Products End -->
-
-<!-- Product Banner Start -->
-<div class="container-fluid py-5">
-    <div class="container">
-        <div class="row g-4">
-            @foreach($promotions as $promotion)
-            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
-                <a href="#">
-                    <div class="bg-primary rounded position-relative">
-                        <img src="storage/{{$promotion->image}}" class="img-fluid w-100 rounded" alt="">
-                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4">
-                            <!-- <h3 class="display-5 text-primary">EOS Rebel <br> <span>T7i Kit</span></h3> -->
-                            <!-- <p class="fs-4 text-muted">$899.99</p> -->
-                            <a href="#" class="btn btn-primary rounded-pill align-self-start py-2 px-4">Comprar ahora</a>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            @endforeach
-            <!-- <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
-                <a href="#">
-                    <div class="text-center bg-primary rounded position-relative">
-                        <img src="img/product-banner-2.jpg" class="img-fluid w-100" alt="">
-                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
-                            style="background: rgba(242, 139, 0, 0.5);">
-                            <h2 class="display-2 text-secondary">SALE</h2>
-                            <h4 class="display-5 text-white mb-4">Get UP To 50% Off</h4>
-                            <a href="#" class="btn btn-secondary rounded-pill align-self-center py-2 px-4">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                </a>
-            </div> -->
-        </div>
-    </div>
-</div>
-<!-- Product Banner End -->
 
  <!-- Bestseller Products Start -->
 <div class="container-fluid products pb-5">

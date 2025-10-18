@@ -1,3 +1,5 @@
+
+@if($products->count() > 0)
 <div id="tab-5" class="tab-pane fade show p-0 active">
     <div class="row g-4 product">
         @foreach($products as $product)
@@ -106,11 +108,12 @@
         @endforeach
     </div>
 </div>
-
-
-
-
-
+@else
+<div class="row container py-4 text-center">
+    <img class="d-block m-auto" src="{{asset('img/rechazado.png')}}" style="max-width: 200px;" alt="">
+    <span>No se encontraron productos</span>
+</div>
+@endif
 <div class="col-12 pt-5">
     {{ $products->links('vendor.pagination.bootstrap-5') }}
 </div>

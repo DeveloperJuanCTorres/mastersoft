@@ -89,7 +89,7 @@
                 <div class="col-12">
                     <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
                         <h4 class="text-primary border-bottom border-primary border-2 d-inline-block pb-2">Ponte en conmtacto con nosotros</h4>
-                        <p class="mb-5 fs-5 text-dark">¡Estamos aquí para ti! ¿Cómo podemos ayudarte? ¡Estamos aquí para ti!</p>
+                        <p class="mb-5 fs-5 text-dark">¡Estamos aquí para ti! ¿Cómo podemos ayudarte?</p>
                     </div>
                 </div>
                 <div class="col-lg-7">
@@ -156,8 +156,8 @@
                                     <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
                                 </div>
                                 <div>
-                                    <h4>Address</h4>
-                                    <p class="mb-2">123 Street New York.USA</p>
+                                    <h4>Dirección</h4>
+                                    <p class="mb-2">{{$business->address}}</p>
                                 </div>
                             </div>
                         </div>
@@ -168,8 +168,8 @@
                                     <i class="fas fa-envelope fa-2x text-primary"></i>
                                 </div>
                                 <div>
-                                    <h4>Mail Us</h4>
-                                    <p class="mb-2">info@example.com</p>
+                                    <h4>Email</h4>
+                                    <p class="mb-2">{{$business->email}}</p>
                                 </div>
                             </div>
                         </div>
@@ -180,8 +180,8 @@
                                     <i class="fa fa-phone-alt fa-2x text-primary"></i>
                                 </div>
                                 <div>
-                                    <h4>Telephone</h4>
-                                    <p class="mb-2">(+012) 3456 7890</p>
+                                    <h4>Teléfono</h4>
+                                    <p class="mb-2">{{$business->phone}}</p>
                                 </div>
                             </div>
                         </div>
@@ -192,8 +192,8 @@
                                     <i class="fab fa-firefox-browser fa-2x text-primary"></i>
                                 </div>
                                 <div>
-                                    <h4>Yoursite@ex.com</h4>
-                                    <p class="mb-2">(+012) 3456 7890</p>
+                                    <h4>mastersoftstore.com</h4>
+                                    <p class="mb-2">{{$business->phone}}</p>
                                 </div>
                             </div>
                         </div>

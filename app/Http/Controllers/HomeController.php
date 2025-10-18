@@ -51,8 +51,11 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
+        $search = $request->input('search');
         $business = Company::find(1);
-        $products = Product::query()->where('stock', '>', 0);
+        $products = Product::query()->where('stock', '>', 0)
+                    ->where('name', 'like', "%{$search}%");
+        $promotions = Promotion::take(2)->get();
         $categoriesNav = Taxonomy::whereHas('products', function ($query) {
             $query->where('stock', '>', 0);
         })->take(8)->get();
@@ -65,6 +68,11 @@ class HomeController extends Controller
 
         if ($request->has('brands')) {
             $products->whereIn('brand_id', $request->brands);
+        }
+
+        if ($request->filled('search')) {
+            $search = trim($request->search);
+            $products->where('name', 'like', "%{$search}%");
         }
 
         $products = $products->paginate(6);
@@ -83,7 +91,7 @@ class HomeController extends Controller
         })->get();
 
        
-        return view('store',compact('categories','brands','products','business','categoriesNav'));
+        return view('store',compact('categories','brands','products','business','categoriesNav','promotions'));
     }
 
     public function detail (Product $product)

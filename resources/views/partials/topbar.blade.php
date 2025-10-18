@@ -20,20 +20,23 @@
             </div>
         </div>
         <div class="col-md-4 col-lg-6 text-center">
-            <div class="position-relative ps-4">
-                <div class="d-flex border rounded-pill">
-                    <input class="form-control border-0 rounded-pill w-100 py-3" type="text"
-                        data-bs-target="#dropdownToggle123" placeholder="Search Looking For?">
-                    
-                    <button type="button" class="btn btn-primary rounded-pill py-3 px-5" style="border: 0;"><i
-                            class="fas fa-search"></i></button>
+            <form action="{{ url('/store') }}" method="GET">
+                <div class="position-relative ps-4">
+                    <div class="d-flex border rounded-pill">
+                        <input class="form-control border-0 rounded-pill w-100 py-3" type="text" id="buscar"
+                            data-bs-target="#dropdownToggle123" placeholder="Buscar producto" name="search">
+                        
+                        <button type="submit" class="btn btn-primary rounded-pill py-3 px-5" style="border: 0;"><i
+                                class="fas fa-search"></i></button>
+                    </div>
+                    <!-- <ul id="resultados" style="position: absolute; z-index:9;" class="list-group mt-5"></ul> -->
                 </div>
-            </div>
+            </form>
         </div>
         <div class="col-md-4 col-lg-3 text-center text-lg-end">
             <div class="d-inline-flex align-items-center">
                 <a href="" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i
-                            class="fa fa-mobile-alt me-2"></i> +0123 456 7890</a>
+                            class="fa fa-mobile-alt me-2"></i> {{$business->phone}}</a>
             </div>
         </div>
     </div>
