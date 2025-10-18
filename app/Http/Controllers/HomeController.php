@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Company;
 use App\Models\Field;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Promotion;
 use App\Models\Taxonomy;
@@ -17,7 +18,7 @@ use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
 use Cart;
-
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -43,10 +44,22 @@ class HomeController extends Controller
             $query->where('stock', '>', 0);
         })->take(8)->get();
 
+        $mas_vendidos_ids = DB::table('order_items')
+            ->select('product_id', DB::raw('SUM(quantity) as total_vendidos'))
+            ->groupBy('product_id')
+            ->orderByDesc('total_vendidos')
+            ->limit(6)
+            ->pluck('product_id'); // devuelve solo los IDs
+
+        $mas_vendidos = Product::with('taxonomy')
+            ->whereIn('id', $mas_vendidos_ids)
+            ->get();
+
+
         $banners = Banner::all();
         $promotions = Promotion::take(2)->get();
         $products = Product::where('stock', '>', 0)->take(12)->get();
-        return view('home',compact('categories','banners','promotions','products','business'));
+        return view('home',compact('categories','banners','promotions','products','business', 'mas_vendidos'));
     }
 
     public function store(Request $request)
@@ -308,7 +321,14 @@ class HomeController extends Controller
             $orden->update([
                 'pdf' => 'pedidos/' . $pdfPath
             ]);
-            
+
+            foreach (Cart::content() as $key => $value) {
+                OrderItem::create([
+                    'product_id' => $value->id,
+                    'quantity' => $value->qty,
+                    'order_id' => $orden->id
+                ]);
+            }                        
 
             $mensaje = Http::post($apis->ruta_whatsapp, [
                 "ruc_empresa" => $business->ruc,
