@@ -279,9 +279,7 @@
         <div class="mx-auto text-center mb-5" style="max-width: 700px;">
             <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp"
                 data-wow-delay="0.1s">Productos más vendidos</h4>
-            <p class="mb-0 wow fadeInUp" data-wow-delay="0.2s">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Modi, asperiores ducimus sint quos tempore officia similique quia? Libero, pariatur
-                consectetur?</p>
+            <!-- <p class="mb-0 wow fadeInUp" data-wow-delay="0.2s">Te mostramos nuestros productos más vendidos</p> -->
         </div>
         <div class="row g-4">
             @foreach($mas_vendidos as $item)
