@@ -15,7 +15,7 @@
         <div class="col-md-4 col-lg-3 text-center text-lg-start">
             <div class="d-inline-flex align-items-center">
                 <a href="/" class="navbar-brand p-0">                    
-                    <img height="70" src="{{asset("storage/$business->image")}}" alt="">
+                    <img height="60" src="{{asset("storage/$business->image")}}" alt="">
                 </a>
             </div>
         </div>
