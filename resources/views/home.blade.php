@@ -32,7 +32,7 @@
         <div class="col-12 col-lg-9">
             <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
                 <a href="/" class="navbar-brand d-block d-lg-none">
-                    <img height="50" src="{{asset("storage/$business->image")}}" alt="">
+                    <img height="40" src="{{asset("storage/$business->image")}}" alt="">
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
