@@ -94,6 +94,8 @@
 </div>
 <!-- Carousel End -->
 
+
+
 <!-- Searvices Start -->
 <div class="container-fluid px-0">
     <div class="row g-0">
@@ -167,26 +169,67 @@
 </div>
 <!-- Searvices End -->
 
-<!-- Product Banner Start -->
-<div class="container-fluid py-5">
-    <div class="container">
-        <div class="row g-4">
+<style>
+    .wrapper1{
+    width: 100%;
+    }
+    .carousel1{
+        display: flex;
+    /* max-width: 1200px; */
+    margin: auto;
+    /* padding: 0 30px; */
+    }
+    .carousel .card{
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin: 20px 0;
+    line-height: 250px;
+    font-size: 90px;
+    font-weight: 600;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    }
+    .owl-dots{
+        display: flex;
+        text-align: center;
+        margin-top: 40px;
+    }
+    .owl-dot{
+    height: 15px;
+    width: 45px;
+    margin: 0 5px;
+    outline: none;
+    border-radius: 14px;
+    border: 2px solid #a4ce3a!important;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+    }
+    .owl-dot.active,
+    .owl-dot:hover{
+    background: #a4ce3a!important;
+    }
+</style>
+
+<!-- Related Product Start -->
+<div class="wrapper1 container-fluid py-5">
+    <div class="mx-auto text-center pb-5" style="max-width: 700px;">
+        <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp"
+            data-wow-delay="0.1s">Nuestras promociones</h4>
+    </div>
+    <div class="carousel1 owl-carousel container">
             @foreach($promotions as $promotion)
-            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
-                <a href="#">
+            <div class="card" data-wow-delay="0.1s">
+                <a href="{{route('product.detail', $promotion->product)}}">
                     <div class="bg-primary rounded position-relative">
                         <img src="storage/{{$promotion->image}}" class="img-fluid w-100 rounded" alt="">
-                        <div class="position-absolute bottom-0 start-50 translate-middle-x mb-3">
-                            <a href="{{route('product.detail', $promotion->product)}}" class="btn btn-primary rounded-pill py-2 px-4">Comprar ahora</a>
-                        </div>
                     </div>
                 </a>
             </div>
             @endforeach
-        </div>
     </div>
-</div>
-<!-- Product Banner End -->
+ </div>
+<!-- Related Product End -->
+ 
 
 <!-- Our Products Start -->
 <div class="container-fluid product py-5">
@@ -340,6 +383,27 @@
 <script src="js/addcart.js"></script>
 <script>
     const baseUrl = "{{ url('/product.detail') }}"; // Esto será "/producto"
+</script>
+
+<script>
+    $(".carousel1").owlCarousel({
+        margin: 20,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsive: {
+        0:{
+            items:1,
+            nav: false
+        },
+        600:{
+            items:2,
+            nav: false
+            }
+        }
+    });
+ 
 </script>
 @endpush
 
