@@ -1,13 +1,20 @@
 @extends('voyager::master')
 
 @section('content')
+<style>
+    .select2-results__options {
+    max-height: 150px !important;
+    overflow-y: auto !important;
+}
+</style>
+
 <div class="page-content browse container-fluid">
     <h1 class="page-title">Productos</h1>
 
     {{-- 🔹 Filtros --}}
     <div class="row mb-3">
         <div class="col-md-3">
-            <select id="filterCategoria" class="form-control" style="max-height: 100px;">
+            <select id="filterCategoria" class="form-control select2">
                 <option value="">-- Categoría --</option>
                 <option value="Electrónica">Electrónica</option>
                 <option value="Ropa">Ropa</option>
@@ -15,7 +22,7 @@
             </select>
         </div>
         <div class="col-md-3">
-            <select id="filterMarca" class="form-control" style="max-height: 100px;">
+            <select id="filterMarca" class="form-control select2">
                 <option value="">-- Marca --</option>
                 <option value="Sony">Sony</option>
                 <option value="Samsung">Samsung</option>
@@ -43,6 +50,9 @@
 @endsection
 
 @section('javascript')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script>
 $(document).ready(function() {
     var table = $('#productsTable').DataTable({
@@ -75,6 +85,14 @@ $(document).ready(function() {
     // 🔹 Redibujar cuando cambian filtros
     $('#filterCategoria, #filterMarca').change(function() {
         table.ajax.reload();
+    });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    $('.select2').select2({
+        dropdownAutoWidth: true
     });
 });
 </script>
