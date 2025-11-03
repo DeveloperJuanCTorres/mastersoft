@@ -7,7 +7,7 @@
     {{-- 🔹 Filtros --}}
     <div class="row mb-3">
         <div class="col-md-3">
-            <select id="filterCategoria" class="form-control">
+            <select id="filterCategoria" class="form-control" style="max-height: 200px;">
                 <option value="">-- Categoría --</option>
                 <option value="Electrónica">Electrónica</option>
                 <option value="Ropa">Ropa</option>
@@ -15,7 +15,7 @@
             </select>
         </div>
         <div class="col-md-3">
-            <select id="filterMarca" class="form-control">
+            <select id="filterMarca" class="form-control" style="max-height: 200px;">
                 <option value="">-- Marca --</option>
                 <option value="Sony">Sony</option>
                 <option value="Samsung">Samsung</option>
