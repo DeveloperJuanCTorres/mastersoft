@@ -1,7 +1,7 @@
 @extends('voyager::master')
 <style>
     .select2-results__options {
-        max-height: 150px !important;
+        max-height: 200px !important;
         overflow-y: auto !important;
     }
 </style>
