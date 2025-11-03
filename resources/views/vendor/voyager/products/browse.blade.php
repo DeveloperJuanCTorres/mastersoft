@@ -1,5 +1,10 @@
 @extends('voyager::master')
-
+<style>
+    .select2-results__options {
+        max-height: 150px !important;
+        overflow-y: auto !important;
+    }
+</style>
 @section('page_title', __('voyager::generic.viewing').' '.$dataType->getTranslatedAttribute('display_name_plural'))
 
 @section('page_header')
@@ -43,7 +48,7 @@
             <div class="col-md-12">
                 <form method="GET" action="{{ route('voyager.products.index') }}" class="form-inline mb-3">
                     <div class="form-group mr-2">
-                        <select name="taxonomy_id" class="form-control">
+                        <select name="taxonomy_id" class="form-control select2">
                             <option value="">-- Filtrar por Categoría --</option>
                             @foreach(App\Models\Taxonomy::all() as $taxonomy)
                                 <option value="{{ $taxonomy->id }}" {{ request('taxonomy_id') == $taxonomy->id ? 'selected' : '' }}>
@@ -54,7 +59,7 @@
                     </div>
 
                     <div class="form-group mr-2">
-                        <select name="brand_id" class="form-control">
+                        <select name="brand_id" class="form-control select2">
                             <option value="">-- Filtrar por Marca --</option>
                             @foreach(App\Models\Brand::all() as $brand)
                                 <option value="{{ $brand->id }}" {{ request('brand_id') == $brand->id ? 'selected' : '' }}>
@@ -350,6 +355,9 @@
 @stop
 
 @section('javascript')
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- DataTables -->
     @if(!$dataType->server_side && config('dashboard.data_tables.responsive'))
         <script src="{{ voyager_asset('lib/js/dataTables.responsive.min.js') }}"></script>
@@ -422,6 +430,14 @@
                 }
             });
             $('.selected_ids').val(ids);
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                dropdownAutoWidth: true
+            });
         });
     </script>
 @stop
