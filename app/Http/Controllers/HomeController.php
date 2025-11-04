@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contactanos;
+use App\Mail\Reclamos;
 use App\Models\Api;
 use App\Models\Banner;
 use App\Models\Brand;
@@ -19,6 +21,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
 use Cart;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -118,7 +121,9 @@ class HomeController extends Controller
                           ->where('id', '!=', $product->id)
                           ->get();
 
-        return view('product-detail', compact('product','categories','relatedProducts','business'));
+        $promotions = Promotion::take(2)->get();
+
+        return view('product-detail', compact('product','categories','relatedProducts','business','promotions'));
     }
 
     public function contact()
@@ -278,6 +283,36 @@ class HomeController extends Controller
             
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'msg' => 'Error:'.$th->getMessage()]);
+        }
+    }
+
+    public function correoContact(Request $request)
+    {
+        $request->validate([
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+       
+
+        $correo = new Contactanos($request->all());
+        try {
+            Mail::to('jtorres@vesergenperu.com')->send($correo);
+            return response()->json(['status' => true, 'msg' => "El correo fue enviado satisfactoriamente"]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => false, 'msg' => "Hubo un error al enviar, inténtalo de nuevo más tarde." . $e->getMessage()]);
+        }
+    }
+
+    public function correoReclamo(Request $request)
+    {
+        $correo = new Reclamos($request);
+        try {
+            Mail::to('jtorres@vesergenperu.com')->send($correo);
+            return response()->json(['status' => true, 'msg' => "El correo fue enviado satisfactoriamente"]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => false, 'msg' => "Hubo un error al enviar, inténtalo de nuevo más tarde." . $e->getMessage()]);
         }
     }
 

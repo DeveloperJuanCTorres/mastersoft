@@ -138,12 +138,12 @@
                 <div class="row g-4 justify-content-end">                    
                     <div class="d-flex justify-content-end">
                         <ul class="nav nav-pills d-inline-flex text-center py-2 px-2 rounded bg-light mb-4" style="flex-wrap: nowrap !important;">
-                            <li class="nav-item me-4">
+                            <li class="nav-item me-4" style="font-size: 12px;">
                                 <a class="bg-light" data-bs-toggle="pill" href="#tab-5">
                                     <i class="fas fa-th fa-3x text-primary"></i>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="font-size: 12px;">
                                 <a class="bg-light" data-bs-toggle="pill" href="#tab-6">
                                     <i class="fas fa-bars fa-3x text-primary"></i>
                                 </a>

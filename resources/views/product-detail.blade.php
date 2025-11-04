@@ -86,7 +86,7 @@
     <div class="container py-5">
         <div class="row g-4">
             <div class="col-lg-5 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="input-group w-100 mx-auto d-flex mb-4">
+                <!-- <div class="input-group w-100 mx-auto d-flex mb-4">
                     <input type="search" class="form-control p-3" placeholder="keywords"
                         aria-describedby="search-icon-1">
                     <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
@@ -104,18 +104,19 @@
                         </li>    
                         @endforeach                    
                     </ul>
-                </div>
-                <a href="#">
-                    <div class="position-relative">
-                        <img src="{{asset('img/product-banner-2.jpg')}}" class="img-fluid w-100 rounded" alt="Image">
-                        <div class="text-center position-absolute d-flex flex-column align-items-center justify-content-center rounded p-4"
-                            style="width: 100%; height: 100%; top: 0; right: 0; background: rgba(242, 139, 0, 0.3);">
-                            <h5 class="display-6 text-primary">SALE</h5>
-                            <h4 class="text-secondary">Get UP To 50% Off</h4>
-                            <a href="#" class="btn btn-primary rounded-pill px-4">Shop Now</a>
-                        </div>
+                </div> -->
+                <h4>Promociones</h4>
+                @foreach($promotions as $promotion)
+                    <div class="wow fadeInLeft py-2" data-wow-delay="0.1s">
+                        <a href="{{route('product.detail', $promotion->product)}}">
+                            <div class="bg-primary rounded position-relative">
+                                <img src="{{asset ('storage/' . $promotion->image)}}" class="img-fluid w-100 rounded" alt="">
+                            </div>
+                        </a>
                     </div>
-                </a>
+                @endforeach
+
+                
             </div>
             <div class="col-lg-7 col-xl-9 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="row g-4 single-product">
@@ -291,7 +292,7 @@
                     <input type="hidden" id="qty" value="1">
                     <a href="#" data-id="{{$product->id}}" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4 addcart"><i
                             class="fas fa-shopping-cart me-2"></i> Agregar al carrito</a>
-                    <div class="d-flex justify-content-between align-items-center">
+                    <!-- <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex">
                             <i class="fas fa-star text-primary"></i>
                             <i class="fas fa-star text-primary"></i>
@@ -308,7 +309,7 @@
                                 class="text-primary d-flex align-items-center justify-content-center me-0"><span
                                     class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             @endforeach

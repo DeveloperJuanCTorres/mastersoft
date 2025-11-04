@@ -169,54 +169,46 @@
                                     <th scope="col" style="width: 100px;">Total</th>
                                 </tr>
                             </thead>
+                        </table>
+
+                        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                            <table class="table mb-0">
+                                <tbody>
+                                    @foreach(Cart::content() as $item)
+                                    <tr class="text-center">
+                                        <th scope="row" class="text-start py-4">
+                                            {{$item->name}}
+                                        </th>
+                                        <td class="py-4">$269.00</td>
+                                        <td class="py-4 text-center">2</td>
+                                        <td class="py-4">$538.00</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <table class="table">
                             <tbody>
-                                @foreach(Cart::content() as $item)
-                                <tr class="text-center">
-                                    <th scope="row" class="text-start py-4">
-                                        {{$item->name}}
-                                    </th>
-                                    <td class="py-4">$269.00</td>
-                                    <td class="py-4 text-center">2</td>
-                                    <td class="py-4">$538.00</td>
-                                </tr>
-                                @endforeach
                                 <tr>
-                                    <th scope="row">
-                                    </th>
-                                    <td class=""></td>
-                                    <td class="">
-                                        <p class="mb-0 text-dark py-2">Subtotal</p>
-                                    </td>
-                                    <td class="">
-                                        <div class="py-2 text-center border-bottom border-top">
-                                            <p class="mb-0 text-dark">S/. {{number_format(Cart::subtotal()/1.18,2)}}</p>
-                                        </div>
+                                    <td></td><td></td>
+                                    <td class="text-dark py-2 text-end">Subtotal</td>
+                                    <td class="text-center border-bottom border-top py-2">
+                                        S/. {{ number_format(Cart::subtotal()/1.18,2) }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">
-                                    </th>
-                                    <td class=""></td>
-                                    <td class="">
-                                        <p class="mb-0 text-dark py-2">IGV</p>
-                                    </td>
-                                    <td class="">
-                                        <div class="py-2 text-center border-bottom border-top">
-                                            <p class="mb-0 text-dark">S/. {{number_format(Cart::subtotal() - Cart::subtotal()/1.18,2)}}</p>
-                                        </div>
+                                    <td></td><td></td>
+                                    <td class="text-dark py-2 text-end">IGV</td>
+                                    <td class="text-center border-bottom border-top py-2">
+                                        S/. {{ number_format(Cart::subtotal() - Cart::subtotal()/1.18,2) }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">
-                                    </th>
-                                    <td class=""></td>
-                                    <td class="">
-                                        <p class="mb-0 text-dark text-uppercase py-2">TOTAL</p>
-                                    </td>                                    
-                                    <td class="">
-                                        <div class="py-2 text-center border-bottom border-top">
-                                            <p class="mb-0 text-dark">S/. {{number_format(Cart::subtotal(),2)}}</p>
-                                        </div>
+                                    <td></td><td></td>
+                                    <td class="text-dark text-uppercase py-2 text-end">TOTAL</td>
+                                    <td class="text-center border-bottom border-top py-2">
+                                        S/. {{ number_format(Cart::subtotal(),2) }}
                                     </td>
                                 </tr>
                             </tbody>

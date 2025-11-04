@@ -43,7 +43,7 @@
                     <div class="navbar-nav ms-auto py-0">
                         <a href="/" class="nav-item nav-link">Inicio</a>
                         <a href="/store" class="nav-item nav-link">Tienda</a>
-                        <a href="/about" class="nav-item nav-link active">Nosotros</a>
+                        <a href="/about" class="nav-item nav-link">Nosotros</a>
                         <a href="/contact" class="nav-item nav-link me-2">Contáctanos</a>
                         <div class="nav-item dropdown d-block d-lg-none mb-3">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categorías</a>
@@ -88,9 +88,9 @@
             @if(Cart::count() > 0)
             <div class="col-lg-8 col-md-6 col-12">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table mb-0">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="col" style="width: 65%;">Producto</th>
                                 <th scope="col" style="width: 10%;">Precio</th>
                                 <th scope="col" style="width: 10%;">Cantidad</th>
@@ -98,48 +98,53 @@
                                 <th scope="col" style="width: 5%;"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach(Cart::content() as $item)
-                            <tr>
-                                <th scope="row" class="d-flex" style="text-align: left;">
-                                    <img src="{{$item->options->image}}" alt="" style="width: 50px;height: 50px;"> 
-                                    <p class="d-block my-auto px-2">{{$item->name}}</p>
-                                </th>
-                                <td>
-                                    <p class="mb-0 py-2">S/. {{$item->price}}</p>
-                                </td>
-                                <td>
-                                    <div class="input-group quantity py-2" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border" data-rowid="{{ $item->rowId }}">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm text-center border-0 qty-input"
-                                            value="{{$item->qty}}" data-rowid="{{ $item->rowId }}">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border" data-rowid="{{ $item->rowId }}">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="mb-0 py-2 subtotal-item" data-rowid="{{ $item->rowId }}">S/. {{ number_format($item->price * $item->qty, 2) }}</p>
-                                </td>
-                                <td class="">
-                                    <form action="{{route('removeitem')}}" method="post">
-                                    @csrf
-                                        <input type="hidden" name="rowId" value="{{$item->rowId}}">
-                                        <button type="submit" class="btn btn-md rounded-circle bg-danger border">
-                                            <i class="fa fa-times text-white"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
                     </table>
+
+                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                        <table class="table mb-0">
+                            <tbody>
+                                @foreach(Cart::content() as $item)
+                                <tr class="text-center">
+                                    <th scope="row" class="d-flex align-items-center text-start py-3">
+                                        <img src="{{$item->options->image}}" alt="" style="width: 50px;height: 50px;">
+                                        <p class="d-block my-auto px-2">{{$item->name}}</p>
+                                    </th>
+                                    <td>
+                                        <p class="mb-0 py-2">S/. {{$item->price}}</p>
+                                    </td>
+                                    <td>
+                                        <div class="input-group quantity py-2" style="width: 100px;">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-minus rounded-circle bg-light border" data-rowid="{{ $item->rowId }}">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm text-center border-0 qty-input"
+                                                value="{{$item->qty}}" data-rowid="{{ $item->rowId }}">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-plus rounded-circle bg-light border" data-rowid="{{ $item->rowId }}">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 py-2 subtotal-item" data-rowid="{{ $item->rowId }}">S/. {{ number_format($item->price * $item->qty, 2) }}</p>
+                                    </td>
+                                    <td>
+                                        <form action="{{route('removeitem')}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="rowId" value="{{$item->rowId}}">
+                                            <button type="submit" class="btn btn-md rounded-circle bg-danger border">
+                                                <i class="fa fa-times text-white"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="container py-4">

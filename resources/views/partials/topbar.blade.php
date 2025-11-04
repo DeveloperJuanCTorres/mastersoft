@@ -15,7 +15,7 @@
         <div class="col-md-4 col-lg-3 text-center text-lg-start">
             <div class="d-inline-flex align-items-center">
                 <a href="/" class="navbar-brand p-0">                    
-                    <img height="60" src="{{asset("storage/$business->image")}}" alt="">
+                    <img width="250" src="{{asset("storage/$business->image")}}" alt="">
                 </a>
             </div>
         </div>
@@ -35,7 +35,7 @@
         </div>
         <div class="col-md-4 col-lg-3 text-center text-lg-end">
             <div class="d-inline-flex align-items-center">
-                <a href="" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i
+                <a href="" class="btn btn-primary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i
                             class="fa fa-mobile-alt me-2"></i> {{$business->phone}}</a>
             </div>
         </div>

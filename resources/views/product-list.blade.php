@@ -21,8 +21,8 @@
                             </div>
                         </div>
                         <div class="text-center rounded-bottom p-4">
-                            <a href="{{route('product.detail', $product)}}" class="d-block mb-2">{{$product->taxonomy->name}}</a>
-                            <a href="#" class="d-block h6 product-name">{{ Str::limit($product->name, 40, '...') }}</a>
+                            <p class="d-block mb-2">{{$product->taxonomy->name}}</p>
+                            <a href="{{route('product.detail', $product)}}" class="d-block h6 product-name">{{ Str::limit($product->name, 40, '...') }}</a>
                             <del class="me-2 fs-5">S/. {{$product->price*1.20}}</del>
                             <span class="text-primary fs-5">S/. {{$product->price}}</span>
                         </div>
@@ -33,7 +33,7 @@
                             <i class="fas fa-shopping-cart me-2"></i> 
                             Agregar al carrito
                         </a>
-                        <div class="d-flex justify-content-between align-items-center">
+                        <!-- <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex">
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
@@ -51,7 +51,7 @@
                                         class="rounded-circle btn-sm-square border"><i
                                             class="fas fa-heart"></i></a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -75,14 +75,14 @@
                                     <img src="img/defectomaster.jpeg" class="img-fluid w-100 h-100" alt="">
                                 @endif
                                 <div class="products-mini-icon rounded-circle bg-primary">
-                                    <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                    <a href="{{route('product.detail', $product)}}"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-7">
                             <div class="products-mini-content p-3">
-                                <a href="#" class="d-block mb-2">{{$product->taxonomy->name}}</a>
-                                <a href="#" class="d-block h5">{{ Str::limit($product->name, 30, '...') }}</a>
+                                <p class="d-block mb-2">{{$product->taxonomy->name}}</p>
+                                <a href="{{route('product.detail', $product)}}" class="d-block h5">{{ Str::limit($product->name, 30, '...') }}</a>
                                 <del class="me-2 fs-5">S/. {{$product->price*1.20}}</del>
                                 <span class="text-primary fs-5">S/. {{$product->price}}</span>
                             </div>
@@ -92,7 +92,7 @@
                         <a href="#"
                             class="btn btn-primary border-secondary rounded-pill py-2 px-4"><i
                                 class="fas fa-shopping-cart me-2"></i> Agregar al carrito</a>
-                        <div class="d-flex">
+                        <!-- <div class="d-flex">
                             <a href="#"
                                 class="text-primary d-flex align-items-center justify-content-center me-3"><span
                                     class="rounded-circle btn-sm-square border"><i
@@ -101,7 +101,7 @@
                                 class="text-primary d-flex align-items-center justify-content-center me-0"><span
                                     class="rounded-circle btn-sm-square border"><i
                                         class="fas fa-heart"></i></a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -115,5 +115,5 @@
 </div>
 @endif
 <div class="col-12 pt-5">
-    {{ $products->links('vendor.pagination.bootstrap-5') }}
+    {{ $products->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
 </div>

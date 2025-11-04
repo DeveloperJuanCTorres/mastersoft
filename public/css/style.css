@@ -318,7 +318,7 @@
 
 .product .product-item:hover .product-item-add {
     background: var(--bs-white);
-    margin-bottom: -124px;
+    margin-bottom: -80px;
     opacity: 1;
 }
 .product .product-item:hover .product-item-inner {
@@ -727,7 +727,7 @@
 
 .related-product .related-carousel .related-item:hover .related-item-add {
     background: var(--bs-white);
-    margin-bottom: -125px;
+    margin-bottom: -80px;
     opacity: 1;
 }
 

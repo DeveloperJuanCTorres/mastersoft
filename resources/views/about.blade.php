@@ -127,46 +127,100 @@
 </div>
 <!-- About End -->
 
+<style>
+    .feature-item {
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        transition: all 0.35s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .feature-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        background: #ffffff !important;
+    }
+
+    .feature-icon i {
+        transition: transform 0.35s ease;
+    }
+
+    .feature-item:hover .feature-icon i {
+        transform: scale(1.1);
+    }
+
+    .feature-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* ✅ centra verticalmente */
+    }
+
+    .feature-content p {
+        flex-grow: 1;
+        display: flex;
+        align-items: center; /* ✅ centra el texto verticalmente */
+        justify-content: center;
+        /* max-height: 220px;
+        overflow-y: auto; */
+    }
+
+    /* Mejoras en móviles */
+    @media (max-width: 768px) {
+        .feature-item {
+            padding: 2rem 1.2rem;
+        }
+        .feature-content p {
+            max-height: none;
+        }
+    }
+</style>
+
 <div class="container-fluid features overflow-hidden py-5">
     <div class="container py-5">
         <div class="row g-4 justify-content-center text-center">
+            
             <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="feature-item text-center p-4 bg-light">
                     <div class="feature-icon p-3 mb-4">
                         <i class="fas fa-users fa-4x text-primary"></i>
                     </div>
-                    <div class="feature-content d-flex flex-column">
+                    <div class="feature-content">
                         <h5 class="mb-3">Misión</h5>
-                        <p class="mb-3">{!! Str::markdown($nosotros->mision) !!}</p>
+                        <p>{!! Str::markdown($nosotros->mision) !!}</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="feature-item text-center p-4 bg-light">
                     <div class="feature-icon p-3 mb-4">
                         <i class="fas fa-low-vision fa-4x text-primary"></i>
                     </div>
-                    <div class="feature-content d-flex flex-column">
+                    <div class="feature-content">
                         <h5 class="mb-3">Visión</h5>
-                        <p class="mb-3">{!! Str::markdown($nosotros->vision) !!}</p>
+                        <p>{!! Str::markdown($nosotros->vision) !!}</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="feature-item text-center p-4 bg-light">
                     <div class="feature-icon p-3 mb-4">
                         <i class="fas fa-user-graduate fa-4x text-primary"></i>
                     </div>
-                    <div class="feature-content d-flex flex-column">
+                    <div class="feature-content">
                         <h5 class="mb-3">Valores</h5>
-                        <p class="mb-3">{!! Str::markdown($nosotros->valores) !!}</p>
+                        <p>{!! Str::markdown($nosotros->valores) !!}</p>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-
 
 
 @include('partials.footer')

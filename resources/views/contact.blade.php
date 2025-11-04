@@ -95,47 +95,48 @@
                 <div class="col-lg-7">
                     <h5 class="text-primary wow fadeInUp" data-wow-delay="0.1s">Vamos a conectarnos</h5>
                     <h1 class="display-5 mb-4 wow fadeInUp" data-wow-delay="0.3s">Envía tu mensaje</h1>
-                    <form>
+                    <form id="contactForm" method="POST" action="{{ route('contact.send') }}" enctype="multipart/form-data">
+                        @csrf
                         <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
                             <div class="col-lg-12 col-xl-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Tu nombre">
+                                    <input type="text" class="form-control inputTexto" id="name" name="name" placeholder="Tu nombre" maxlength="100">
                                     <label for="name">Tu Nombre</label>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-xl-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Tu Email">
+                                    <input type="email" class="form-control inputTexto" id="email" name="email" placeholder="Tu Email" maxlength="100">
                                     <label for="email">Tu Email</label>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-xl-6">
                                 <div class="form-floating">
-                                    <input type="phone" class="form-control" id="phone" placeholder="Phone">
+                                    <input type="phone" class="form-control inputTexto" id="phone" name="phone" placeholder="Phone" maxlength="15">
                                     <label for="phone">Tu Teléfono</label>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-xl-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="project" placeholder="Project">
+                                    <input type="text" class="form-control inputTexto" id="project" name="project" placeholder="Project" maxlength="100">
                                     <label for="project">Tu Proyecto</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <input type="text" class="form-control inputTexto" id="subject" name="subject" placeholder="Subject" maxlength="100">
                                     <label for="subject">Asunto</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a message here" id="message"
-                                        style="height: 160px"></textarea>
+                                    <textarea class="form-control inputTexto" placeholder="Leave a message here" id="message" name="message"
+                                        style="height: 160px" maxlength="500"></textarea>
                                     <label for="message">Mensaje</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3">Enviar Mensaje</button>
+                                <button class="btn btn-primary w-100 py-3" style="submit">Enviar Mensaje</button>
                             </div>
                         </div>
                     </form>
@@ -151,9 +152,9 @@
                     <div class="row g-4 align-items-center justify-content-center">
                         <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
                             <div class="rounded p-4">
-                                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-4"
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center mb-4"
                                     style="width: 70px; height: 70px;">
-                                    <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
+                                    <i class="fas fa-map-marker-alt fa-2x text-white"></i>
                                 </div>
                                 <div>
                                     <h4>Dirección</h4>
@@ -163,9 +164,9 @@
                         </div>
                         <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
                             <div class="rounded p-4">
-                                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-4"
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center mb-4"
                                     style="width: 70px; height: 70px;">
-                                    <i class="fas fa-envelope fa-2x text-primary"></i>
+                                    <i class="fas fa-envelope fa-2x text-white"></i>
                                 </div>
                                 <div>
                                     <h4>Email</h4>
@@ -175,9 +176,9 @@
                         </div>
                         <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
                             <div class="rounded p-4">
-                                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-4"
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center mb-4"
                                     style="width: 70px; height: 70px;">
-                                    <i class="fa fa-phone-alt fa-2x text-primary"></i>
+                                    <i class="fa fa-phone-alt fa-2x text-white"></i>
                                 </div>
                                 <div>
                                     <h4>Teléfono</h4>
@@ -187,13 +188,13 @@
                         </div>
                         <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
                             <div class="rounded p-4">
-                                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-4"
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center mb-4"
                                     style="width: 70px; height: 70px;">
-                                    <i class="fab fa-firefox-browser fa-2x text-primary"></i>
+                                    <i class="fab fa-firefox-browser fa-2x text-white"></i>
                                 </div>
                                 <div>
-                                    <h4>mastersoftstore.com</h4>
-                                    <p class="mb-2">{{$business->phone}}</p>
+                                    <h4>Sitio Web</h4>
+                                    <p class="mb-2">mastersoftstore.com</p>
                                 </div>
                             </div>
                         </div>
@@ -209,5 +210,110 @@
 
 @include('partials.footer')
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    document.querySelectorAll('.inputTexto').forEach(function (input) {
+        input.addEventListener('input', function (e) {
+            const prohibido = /[<>{};*$%=()&]/g; // Caracteres que quieres bloquear
+            if (prohibido.test(e.target.value)) {
+                e.target.value = e.target.value.replace(prohibido, '');
+            }
+        });
+    });
+</script> 
+
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let form = this;
+        let formData = new FormData(form);
+
+        // Mostrar loading
+        Swal.fire({
+            title: 'Enviando...',
+            text: 'Por favor espere',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+        });
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            Swal.close(); // cerrar loading
+
+            if (data.status) {
+                const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+                });
+                Toast.fire({
+                icon: "success",
+                title: data.msg
+                });  
+
+                form.reset(); // limpiar formulario
+            } else {
+                const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+                });
+                Toast.fire({
+                icon: "error",
+                title: data.msg
+                });  
+
+                form.reset(); // limpiar formulario
+            }
+        })
+        .catch(error => {
+            Swal.close();
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+                });
+                Toast.fire({
+                icon: "error",
+                title: 'Hubo un problema al enviar. Inténtalo más tarde.'
+                });  
+            
+                form.reset(); // limpiar formulario
+            console.error(error);
+        });
+    });
+</script>
 
 @endsection

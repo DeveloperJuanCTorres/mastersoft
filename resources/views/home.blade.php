@@ -284,7 +284,7 @@
                                         <i class="fas fa-shopping-cart me-2"></i> 
                                         Agregar al carrito
                                     </a>
-                                    <div class="d-flex justify-content-between align-items-center">
+                                    <!-- <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex">
                                             <i class="fas fa-star text-primary"></i>
                                             <i class="fas fa-star text-primary"></i>
@@ -302,7 +302,7 @@
                                                     class="rounded-circle btn-sm-square border"><i
                                                         class="fas fa-heart"></i></a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

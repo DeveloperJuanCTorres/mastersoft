@@ -26,6 +26,9 @@ Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update
 Route::get('cart/clear', [App\Http\Controllers\CartController::class, 'clear'])->name('clear');
 Route::post('cart/removeitem', [App\Http\Controllers\CartController::class, 'removeItem'])->name('removeitem');
 
+Route::post('/contact/send', [App\Http\Controllers\HomeController::class, 'correoContact'])->name('contact.send');
+Route::post('/reclamo',[App\Http\Controllers\HomeController::class,'correoReclamo']);
+
 Route::post('/enviar_pedido', [App\Http\Controllers\HomeController::class, 'pedido'])->name('enviar_pedido');
 
 
