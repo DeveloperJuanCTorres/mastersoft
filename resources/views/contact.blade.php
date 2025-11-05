@@ -32,7 +32,7 @@
         <div class="col-12 col-lg-9">
             <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
                 <a href="/" class="navbar-brand d-block d-lg-none">
-                    <img height="50" src="{{asset("storage/$business->image")}}" alt="">
+                    <img width="200" src="{{asset("storage/$business->image")}}" alt="">
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
@@ -45,23 +45,23 @@
                         <a href="/store" class="nav-item nav-link">Tienda</a>
                         <a href="/about" class="nav-item nav-link">Nosotros</a>
                         <a href="/contact" class="nav-item nav-link me-2 active">Contáctanos</a>
-                        <div class="nav-item dropdown d-block d-lg-none mb-3">
+                        <!-- <div class="nav-item dropdown d-block d-lg-none mb-3">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categorías</a>
                             <div class="dropdown-menu m-0">
                                 <ul class="list-unstyled categories-bars">
-                                    @foreach($categories as $category)    
+                                    foreach(categories as category)    
                                     <li>
                                         <div class="categories-bars-item">
-                                            <a href="{{ route('store', ['categories' => $category->id]) }}" class="nav-item nav-link">{{$category->name}}</a>
+                                            <a href=" route('store', ['categories' => category->id]) " class="nav-item nav-link">category->name</a>
                                         </div>
                                     </li>                            
-                                    @endforeach                                    
+                                    endforeach                                    
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     
-                    <a href="/cart" class="text-muted d-flex align-items-center justify-content-center"><span
+                    <a href="/cart" class="text-muted d-flex align-items-center justify-content-end"><span
                         class="rounded-circle btn-md-square border bg-white"><i class="fas fa-shopping-cart"></i></span>
                     <span class="text-white ms-2" id="cartTotal">S/. {{\Cart::subtotal()}}</span></a>
                 </div>
