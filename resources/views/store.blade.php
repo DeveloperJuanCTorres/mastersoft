@@ -102,7 +102,7 @@
                         @foreach($categories as $key => $category)                        
                         <div class="additional-product-item">
                             <input type="radio" class="me-2" id="category-{{$key}}" name="categories[]" value="{{ $category->id }}" {{ request('categories') == $category->id ? 'checked' : '' }}>
-                            <label for="category-{{$key}}" class="text-dark"> {{$category->name}}</label>
+                            <label for="category-{{$key}}" class="text-dark" style="font-size: 14px;"> {{$category->name}}</label>
                             <span class="badge border font-weight-normal bg-primary" style="float: right;">{{$category->productsInStock->count()}}</span>
                         </div> 
                         @endforeach
@@ -120,7 +120,7 @@
                         @foreach($brands as $key => $brand)
                         <div class="additional-product-item">
                             <input type="radio" class="me-2" id="brand-{{$key}}" name="brands[]" value="{{ $brand->id }}">
-                            <label for="Categories-{{$key}}" class="text-dark"> {{$brand->name}}</label>
+                            <label for="Categories-{{$key}}" class="text-dark" style="font-size: 14px;"> {{$brand->name}}</label>
                             <span class="badge border font-weight-normal bg-primary" style="float: right;">{{$brand->productsInStock->count()}}</span>
                         </div>
                         @endforeach
