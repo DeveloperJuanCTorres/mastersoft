@@ -97,14 +97,17 @@
                     <div class="mb-4 w-100">
                         <button type="button" id="resetFilters" class="btn btn-sm btn-danger">Limpiar filtros</button>
                     </div>
+                    <h4>Categorías</h4>
                     <div class="additional-product mb-4 overflow-auto" style="max-height: 400px;">
-                        <h4>Categorías</h4>
+                        
                         @foreach($categories as $key => $category)                        
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="category-{{$key}}" name="categories[]" value="{{ $category->id }}" {{ request('categories') == $category->id ? 'checked' : '' }}>
-                            <label for="category-{{$key}}" class="text-dark" style="font-size: 14px;"> {{$category->name}}</label>
-                            <span class="badge border font-weight-normal bg-primary" style="float: right;">{{$category->productsInStock->count()}}</span>
-                        </div> 
+                        <div class="additional-product-item d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center flex-grow-1 me-2">
+                                <input type="radio" class="me-2" id="category-{{$key}}" name="categories[]" value="{{ $category->id }}" {{ request('categories') == $category->id ? 'checked' : '' }}>
+                                <label for="category-{{$key}}" class="text-dark mb-0" style="font-size: 14px; word-break: break-word;">{{$category->name}}</label>
+                            </div>
+                            <span class="badge border font-weight-normal bg-primary">{{$category->productsInStock->count()}}</span>
+                        </div>
                         @endforeach
                     </div>
                     <hr>
@@ -115,13 +118,16 @@
                         <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
                         <div class=""></div>
                     </div> -->
+                    <h4>Marcas</h4>
                     <div class="additional-product mb-4 overflow-auto" style="max-height: 400px;">
-                        <h4>Marcas</h4>
+                        
                         @foreach($brands as $key => $brand)
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="brand-{{$key}}" name="brands[]" value="{{ $brand->id }}">
-                            <label for="Categories-{{$key}}" class="text-dark" style="font-size: 14px;"> {{$brand->name}}</label>
-                            <span class="badge border font-weight-normal bg-primary" style="float: right;">{{$brand->productsInStock->count()}}</span>
+                        <div class="additional-product-item d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center flex-grow-1 me-2">
+                                <input type="radio" class="me-2" id="brand-{{$key}}" name="brands[]" value="{{ $brand->id }}">
+                                <label for="brand-{{$key}}" class="text-dark mb-0" style="font-size: 13px; word-break: break-word;">{{$brand->name}}</label>
+                            </div>
+                            <span class="badge border font-weight-normal bg-primary">{{$brand->productsInStock->count()}}</span>
                         </div>
                         @endforeach
                     </div>
