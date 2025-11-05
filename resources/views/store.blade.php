@@ -94,6 +94,9 @@
                                     class="fa fa-search"></i></span>
                         </div>
                     </div>
+                    <div class="mb-4 w-100">
+                        <button type="button" id="resetFilters" class="btn btn-sm btn-danger">Limpiar filtros</button>
+                    </div>
                     <div class="additional-product mb-4 overflow-auto" style="max-height: 400px;">
                         <h4>Categorías</h4>
                         @foreach($categories as $key => $category)                        
@@ -178,6 +181,7 @@
     const productContainer = document.getElementById('productContainer');
     const loadingSpinner = document.getElementById('loadingSpinner');
     const searchInput = document.getElementById('searchInput');
+    const resetFilters = document.getElementById('resetFilters');
 
     let debounceTimeout;
 
@@ -186,6 +190,16 @@
         debounceTimeout = setTimeout(() => {
             fetchProducts();
         }, 300);
+    });
+
+    // 🟥 Limpiar todos los filtros
+    resetFilters.addEventListener('click', function () {
+        form.reset(); // limpia todos los inputs del formulario
+        searchInput.value = '';  
+        $('#buscar').val('');
+        form.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => el.checked = false);
+        updateURLWithoutParams();
+        fetchProducts(); // recarga todos los productos
     });
 
     form.addEventListener('change', function () {
@@ -206,6 +220,7 @@
         .then(response => response.text())
         .then(html => {
             productContainer.innerHTML = html;
+            updateURLParams(params);
         })
         .finally(() => {
             loadingSpinner.classList.add('hidden'); // Ocultar spinner
@@ -221,6 +236,18 @@
             fetchProducts(page);
         }
     });
+
+    // 🧩 Actualiza la URL en tiempo real sin recargar la página
+    function updateURLParams(params) {
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        window.history.replaceState({}, '', newUrl);
+    }
+
+    // 🧼 Limpia la URL completamente (sin parámetros)
+    function updateURLWithoutParams() {
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, '', cleanUrl);
+    }
 });
 </script>
 @endpush
