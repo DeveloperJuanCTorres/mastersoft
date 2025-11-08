@@ -181,12 +181,31 @@
         transition: .5s;
         opacity: 0;
     }
+    .filtro-destock{
+        display: block;
+    }
+
+    .filtro-mobil{
+        display: none;
+    }
 }
 
 @media (max-width: 992px) {
     .nav-bar .navbar .navbar-nav .nav-link {
         padding: 8px 0px;
     }
+
+    .filtro-destock{
+        display: none;
+    }
+
+    .filtro-mobil{
+        display: block;
+    }
+
+    .offcanvas-70 {
+        width: 70% !important;
+        }
 }
 
 .dropdown .dropdown-menu a:hover {

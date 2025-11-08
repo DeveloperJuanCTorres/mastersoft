@@ -94,11 +94,58 @@
                                     class="fa fa-search"></i></span>
                         </div>
                     </div>
+                    <div class="filtro-mobil pb-4">
+                        <h4>Filtros</h4>
+                        <a href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCategoria" aria-controls="offcanvasCategoria">
+                            <span class="badge bg-info text-dark">Categorías</span>                            
+                        </a>
+                        <a href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMarca" aria-controls="offcanvasMarca">
+                            <span class="badge bg-info text-dark">Marcas</span>
+                        </a>
+                    </div>
+
+                    <div class="offcanvas offcanvas-end offcanvas-70" tabindex="-1" id="offcanvasCategoria" aria-labelledby="offcanvasCategoriaLabel">
+                        <div class="offcanvas-header">
+                            <h5 id="offcanvasCategoriaLabel">Categorías</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            @foreach($categories as $key => $category)                        
+                            <div class="additional-product-item d-flex align-items-center justify-content-between py-2">
+                                <div class="d-flex align-items-center flex-grow-1 me-2">
+                                    <input type="radio" class="me-2" id="categorym-{{$key}}" name="categories[]" value="{{ $category->id }}" {{ request('categories') == $category->id ? 'checked' : '' }}>
+                                    <label for="categorym-{{$key}}" class="text-dark mb-0" style="font-size: 14px; word-break: break-word;">{{$category->name}}</label>
+                                </div>
+                                <span class="badge border font-weight-normal bg-primary">{{$category->productsInStock->count()}}</span>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="offcanvas offcanvas-end offcanvas-70" tabindex="-1" id="offcanvasMarca" aria-labelledby="offcanvasMarcaLabel">
+                        <div class="offcanvas-header">
+                            <h5 id="offcanvasMarcaLabel">Marcas</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            @foreach($brands as $key => $brand)
+                            <div class="additional-product-item d-flex align-items-center justify-content-between py-2">
+                                <div class="d-flex align-items-center flex-grow-1 me-2">
+                                    <input type="radio" class="me-2" id="brandm-{{$key}}" name="brands[]" value="{{ $brand->id }}">
+                                    <label for="brandm-{{$key}}" class="text-dark mb-0" style="font-size: 13px; word-break: break-word;">{{$brand->name}}</label>
+                                </div>
+                                <span class="badge border font-weight-normal bg-primary">{{$brand->productsInStock->count()}}</span>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+
                     <div class="mb-4 w-100">
                         <button type="button" id="resetFilters" class="btn btn-sm btn-danger">Limpiar filtros</button>
                     </div>
-                    <h4>Categorías</h4>
-                    <div class="additional-product mb-4 overflow-auto" style="max-height: 400px;">
+                    <h4 class="filtro-destock">Categorías</h4>
+                    <div class="additional-product mb-4 overflow-auto filtro-destock" style="max-height: 400px;">
                         
                         @foreach($categories as $key => $category)                        
                         <div class="additional-product-item d-flex align-items-center justify-content-between">
@@ -110,16 +157,9 @@
                         </div>
                         @endforeach
                     </div>
-                    <hr>
-                    <!-- <div class="price mb-4">
-                        <h4 class="mb-2">Price</h4>
-                        <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0" max="500"
-                            value="0" oninput="amount.value=rangeInput.value">
-                        <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
-                        <div class=""></div>
-                    </div> -->
-                    <h4>Marcas</h4>
-                    <div class="additional-product mb-4 overflow-auto" style="max-height: 400px;">
+                    <hr class="filtro-destock">
+                    <h4 class="filtro-destock">Marcas</h4>
+                    <div class="additional-product mb-4 overflow-auto filtro-destock" style="max-height: 400px;">
                         
                         @foreach($brands as $key => $brand)
                         <div class="additional-product-item d-flex align-items-center justify-content-between">
@@ -131,16 +171,18 @@
                         </div>
                         @endforeach
                     </div>
-                    <hr>
-                    @foreach($promotions as $promotion)
-                    <div class="wow fadeInLeft py-2" data-wow-delay="0.1s">
-                        <a href="{{route('product.detail', $promotion->product)}}">
-                            <div class="bg-primary rounded position-relative">
-                                <img src="storage/{{$promotion->image}}" class="img-fluid w-100 rounded" alt="">
-                            </div>
-                        </a>
+                    <hr class="filtro-destock">
+                    <div class="filtro-destock">   
+                        @foreach($promotions as $promotion)
+                        <div class="wow fadeInLeft py-2" data-wow-delay="0.1s">
+                            <a href="{{route('product.detail', $promotion->product)}}">
+                                <div class="bg-primary rounded position-relative">
+                                    <img src="storage/{{$promotion->image}}" class="img-fluid w-100 rounded" alt="">
+                                </div>
+                            </a>
+                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </form>
             </div>
             <div class="col-lg-9 wow fadeInUp" data-wow-delay="0.1s">                
