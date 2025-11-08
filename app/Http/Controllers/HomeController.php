@@ -100,11 +100,11 @@ class HomeController extends Controller
 
         $categories = Taxonomy::whereHas('products', function ($query) {
             $query->where('stock', '>', 0);
-        })->get();
+        })->orderBy('name', 'asc')->get();
 
         $brands = Brand::whereHas('products', function ($query) {
             $query->where('stock', '>', 0);
-        })->get();
+        })->orderBy('name', 'asc')->get();
 
        
         return view('store',compact('categories','brands','products','business','categoriesNav','promotions'));
