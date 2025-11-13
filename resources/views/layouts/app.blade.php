@@ -21,6 +21,18 @@
     ?>
 
     
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('logos/16X16.png') }}?v=<?php echo $version ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('logos/32X32.png') }}?v=<?php echo $version ?>">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('logos/48X48.png') }}?v=<?php echo $version ?>">
+    <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('logos/64X64.png') }}?v=<?php echo $version ?>">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('logos/96X96.png') }}?v=<?php echo $version ?>">
+    <link rel="icon" type="image/png" sizes="128x128" href="{{ asset('logos/128X128.png') }}?v=<?php echo $version ?>">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('logos/192X192.png') }}?v=<?php echo $version ?>">
+    <link rel="icon" type="image/png" sizes="256x256" href="{{ asset('logos/256X256.png') }}?v=<?php echo $version ?>">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('logos/512X512.png') }}?v=<?php echo $version ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('logos/apple-touch-icon.png') }}?v=<?php echo $version ?>">
+
+    
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
