@@ -161,7 +161,7 @@
 <section class="tc-container">
     <div class="tc-card">
 
-        {!! Str::markdown($politicas->description) !!}
+        {!! Str::markdown($terminos->description) !!}
 
     </div>
 </section>

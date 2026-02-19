@@ -23,8 +23,8 @@
                     <a href="store" class=""><i class="fas fa-angle-right me-2"></i> Tienda</a>
                     <a href="/about" class=""><i class="fas fa-angle-right me-2"></i> Nosotros</a>
                     <a href="/contact" class=""><i class="fas fa-angle-right me-2"></i> Contáctanos</a>
-                    <a href="/politicas-privacidad" class=""><i class="fas fa-angle-right me-2"></i> Políticas de privacidad</a>
-                    <a href="/terminos-condiciones" class=""><i class="fas fa-angle-right me-2"></i> Términos y condiciones</a>
+                    <a href="/politicas-de-privacidad" class=""><i class="fas fa-angle-right me-2"></i> Políticas de privacidad</a>
+                    <a href="/terminos-y-condiciones" class=""><i class="fas fa-angle-right me-2"></i> Términos y condiciones</a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
