@@ -161,8 +161,9 @@
 <section class="tc-container">
     <div class="tc-card">
 
+        @if($politicas->description)
         {!! Str::markdown($politicas->description) !!}
-
+        @endif
     </div>
 </section>
 
