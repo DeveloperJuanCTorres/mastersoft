@@ -95,7 +95,7 @@
                 <h1 class="display-5 mb-4">{{$nosotros->titulo}}</h1>
                 <p class="mb-4">{!! Str::markdown($nosotros->description) !!}</p>
                 <div class="row gy-4 align-items-center">
-                    <div class="col-4 col-md-3">
+                    <div class="col-5 col-md-3">
                         <div class="bg-light text-center rounded p-3">
                             <div class="mb-2">
                                 <i class="fas fa-award fa-4x text-primary"></i>
@@ -104,7 +104,7 @@
                             <p class="text-muted mb-0">Años de Experiencia</p>
                         </div>
                     </div>
-                    <div class="col-8 col-md-9">
+                    <div class="col-7 col-md-9">
                         <div class="d-flex flex-wrap">
                             <div id="phone-tada" class="d-flex align-items-center justify-content-center me-4">
                                 <a href="" class="position-relative wow tada" data-wow-delay=".9s">

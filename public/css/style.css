@@ -910,3 +910,8 @@
 .bg-primary {
     background-color: #a4ce3a !important;
 }
+
+.bg-info {
+    background-color: #a4ce3a !important;
+    color: white !important;
+}
