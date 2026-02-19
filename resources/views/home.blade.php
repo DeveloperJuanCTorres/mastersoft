@@ -272,8 +272,8 @@
                                         </div>
                                     </div>
                                     <div class="text-center rounded-bottom p-4">
-                                        <a href="{{route('product.detail', $product)}}" class="d-block mb-2">{{$product->taxonomy->name}}</a>
-                                        <a href="#" class="d-block h5 product-name">{{ Str::limit($product->name, 40, '...') }}</a>
+                                        <a href="#" class="d-block mb-2">{{$product->taxonomy->name}}</a>
+                                        <a href="{{route('product.detail', $product)}}" class="d-block h5 product-name">{{ Str::limit($product->name, 40, '...') }}</a>
                                         <del class="me-2 fs-5">S/. {{$product->price*1.20}}</del>
                                         <span class="text-primary fs-5">S/. {{$product->price}}</span>
                                     </div>
@@ -347,7 +347,7 @@
                         <div class="col-7">
                             <div class="products-mini-content p-3">
                                 <a href="#" class="d-block mb-2">{{$item->taxonomy->name}}</a>
-                                <a href="#" class="d-block h5">{{ Str::limit($item->name, 40, '...') }}</a>
+                                <a href="{{route('product.detail', $item)}}" class="d-block h5">{{ Str::limit($item->name, 40, '...') }}</a>
                                 <del class="me-2 fs-5">S/. {{$item->price*1.20}}</del>
                                 <span class="text-primary fs-5">S/. {{$item->price}}</span>
                             </div>

@@ -11,9 +11,11 @@ use App\Models\Company;
 use App\Models\Field;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Politica;
 use App\Models\Product;
 use App\Models\Promotion;
 use App\Models\Taxonomy;
+use App\Models\Termino;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -381,5 +383,27 @@ class HomeController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'msg' => $th->getMessage()]);
         }        
+    }
+
+    public function terminos()
+    {
+        $business = Company::find(1);
+        $categories = Taxonomy::whereHas('products', function ($query) {
+            $query->where('stock', '>', 0);
+        })->take(8)->get();
+
+        $terminos = Termino::first();
+        return view('terminos', compact('business','categories','terminos'));
+    }
+
+    public function politicas()
+    {
+        $business = Company::find(1);
+        $categories = Taxonomy::whereHas('products', function ($query) {
+            $query->where('stock', '>', 0);
+        })->take(8)->get();
+
+        $politicas = Politica::first();
+        return view('politicas', compact('business','categories','politicas'));
     }
 }

@@ -31,6 +31,9 @@ Route::post('/reclamo',[App\Http\Controllers\HomeController::class,'correoReclam
 
 Route::post('/enviar_pedido', [App\Http\Controllers\HomeController::class, 'pedido'])->name('enviar_pedido');
 
+Route::get('/terminos-y-condiciones', [App\Http\Controllers\HomeController::class, 'terminos'])->name('terminos');
+Route::get('/politicas-de-privacidad', [App\Http\Controllers\HomeController::class, 'politicas'])->name('politicas');
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
